@@ -6,5 +6,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="info">Info</string>
     <string name="title_8_puzzle">8 Puzzle</string>
-    <string name="info_description">The 8-Puzzle was "invented" by Noyes Palmer Chapman around 1874. </string>
+    <string name="info_description">The 8-Puzzle was "invented" by Noyes Palmer Chapman around 1874.</string>
+    <string name="how_to_play_instructions">Move the tiles into the blank space to make the pattern shown above.</string>
+    <string name="how_to_play">How To Play</string>
+    <string name="help">Help</string>
 </resources>
