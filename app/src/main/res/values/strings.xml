@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">8-Puzzle</string>
+    <string name="home">Home</string>
+    <string name="solver">Solver</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="info">Info</string>
+    <string name="title_8_puzzle">8 Puzzle</string>
+    <string name="info_description">The 8-Puzzle was "invented" by Noyes Palmer Chapman around 1874. </string>
+</resources>
