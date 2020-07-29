@@ -10,4 +10,7 @@
     <string name="how_to_play_instructions">Move the tiles into the blank space to make the pattern shown above.</string>
     <string name="how_to_play">How To Play</string>
     <string name="help">Help</string>
+    <string name="solved">Solved!</string>
+    <string name="scramble">Scramble</string>
+    <string name="reset">Reset</string>
 </resources>
