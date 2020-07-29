@@ -28,6 +28,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
     private Tile blankTile;
     private View view;
     private int stepCount;
+    private boolean boardIsClickable;
     
     public HomeFragment() {
         // Required empty public constructor
@@ -48,8 +49,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
         solvedText = view.findViewById(R.id.home_solved_text);
         resetButton = view.findViewById(R.id.home_reset_button);
         scrambleButton = view.findViewById(R.id.home_scramble_button);
-        solvedText.setVisibility(View.INVISIBLE);
-        stepCount = 0;
+
         tiles = new ArrayList<>(9);
         resetBoard();
         
@@ -61,6 +61,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
         
         gridView.setOnItemClickListener(this);
         resetButton.setOnClickListener(this);
+        scrambleButton.setOnClickListener(this);
         return view;
     }
     
@@ -72,24 +73,48 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
         // the blank tile:
         blankTile = new Tile(8 + 1);
         tiles.add(8, blankTile);
+        boardIsClickable = true;
+        resetSteps();
+    }
+    
+    private void resetSteps() {
+        solvedText.setVisibility(View.INVISIBLE);
+        stepCount = 0;
+        stepCounter.setText(String.format(Locale.CANADA, "Steps: %d", stepCount));
     }
     
     private void scrambleBoard() {
+        tiles.clear();
         resetBoard();
         Collections.shuffle(tiles);
+        /*checkIfValid();*/
+        resetSteps();
     }
     
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         // check if the move is possible (only distance of 1 to the empty space)
-        if (moveIsPossible(position)) {
+        if (moveIsPossible(position) && boardIsClickable) {
             exchangeWithBlank(position);
             stepCount++;
             stepCounter.setText(String.format(Locale.CANADA, "Steps: %d", stepCount));
             tilesAdapter.notifyDataSetChanged();
             gridView.setAdapter(tilesAdapter);
             gridView.invalidateViews();
+            if (puzzleIsSolved()) {
+                boardIsClickable = false;
+                solvedText.setVisibility(View.VISIBLE);
+            }
         }
+    }
+    
+    private boolean puzzleIsSolved() {
+        for (int i = 0; i < 8; i++) {
+            if (tiles.get(i).getNumber() != i + 1) {
+                return false;
+            }
+        }
+        return true;
     }
     
     private boolean moveIsPossible(int position) {
@@ -136,6 +161,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
                 break;
             case R.id.home_scramble_button:
                 scrambleBoard();
+                Log.d(TAG, "Scrambling");
                 tilesAdapter.notifyDataSetChanged();
                 gridView.setAdapter(tilesAdapter);
                 gridView.invalidateViews();
