@@ -51,7 +51,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
         scrambleButton = view.findViewById(R.id.home_scramble_button);
 
         tiles = new ArrayList<>(9);
-        resetBoard();
+        scrambleBoard();
         
         gridView = view.findViewById(R.id.home_gridview);
         tilesAdapter = new TilesAdapter(tiles, view.getContext());

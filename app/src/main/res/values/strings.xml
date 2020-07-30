@@ -13,4 +13,6 @@
     <string name="solved">Solved!</string>
     <string name="scramble">Scramble</string>
     <string name="reset">Reset</string>
+    <string name="solver_instructions">Fill in the numbers to solve, using the number 0 for the blank tile.</string>
+    <string name="solve">Solve</string>
 </resources>
