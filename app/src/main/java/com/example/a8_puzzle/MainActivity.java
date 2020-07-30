@@ -1,13 +1,12 @@
 package com.example.a8_puzzle;
 
+import android.os.Bundle;
+import android.view.MenuItem;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.widget.Toolbar;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -15,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
     
     private BottomNavigationView bottomNavigationView;
     private Fragment homeFragment, solverFragment, infoFragment;
+
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         
         bottomNavigationView = findViewById(R.id.bottom_navigation);
+    
         // initialize fragments
         homeFragment = new HomeFragment();
         solverFragment = new SolverFragment();
@@ -46,6 +47,18 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        
+  /*      // get solver args
+        Intent intent = getIntent();
+        String data = intent.getStringExtra("solverData");
+        
+        // send to solver steps fragment
+        Bundle bundle = new Bundle();
+        bundle.putString("solverData", data);
+        //set args
+        SolverStepsFragment solverStepsFragment = new SolverStepsFragment();
+        solverStepsFragment.setArguments(bundle);*/
+    
     }
     
     private void replaceFragment(Fragment fragment) {

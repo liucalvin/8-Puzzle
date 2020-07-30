@@ -1,7 +1,6 @@
 package com.example.a8_puzzle;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,8 +56,6 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
         tilesAdapter = new TilesAdapter(tiles, view.getContext());
         gridView.setAdapter(tilesAdapter);
         
-        Log.d(TAG, "Tile added: " + 8 + 1);
-        
         gridView.setOnItemClickListener(this);
         resetButton.setOnClickListener(this);
         scrambleButton.setOnClickListener(this);
@@ -95,7 +92,10 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         // check if the move is possible (only distance of 1 to the empty space)
         if (moveIsPossible(position) && boardIsClickable) {
-            exchangeWithBlank(position);
+            // exchange the tile with the blank tile
+            int blankTileIndex = tiles.indexOf(blankTile);
+            exchangeTiles(position, blankTileIndex);
+    
             stepCount++;
             stepCounter.setText(String.format(Locale.CANADA, "Steps: %d", stepCount));
             tilesAdapter.notifyDataSetChanged();
@@ -133,13 +133,12 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
         return count == 1;
     }
     
-    private void exchangeWithBlank(int position) {
+    private void exchangeTiles(int position1, int position2) {
         List<Tile> tempTiles = new ArrayList<>(tiles);
-        int blankTileIndex = tempTiles.indexOf(blankTile);
-        Tile temp = tempTiles.remove(position);
-        tempTiles.add(position, blankTile);
-        tempTiles.remove(blankTileIndex);
-        tempTiles.add(blankTileIndex, temp);
+        Tile temp = tempTiles.remove(position1);
+        tempTiles.add(position1, blankTile);
+        tempTiles.remove(position2);
+        tempTiles.add(position2, temp);
         tiles.clear();
         tiles.addAll(tempTiles);
     }
@@ -161,7 +160,6 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
                 break;
             case R.id.home_scramble_button:
                 scrambleBoard();
-                Log.d(TAG, "Scrambling");
                 tilesAdapter.notifyDataSetChanged();
                 gridView.setAdapter(tilesAdapter);
                 gridView.invalidateViews();

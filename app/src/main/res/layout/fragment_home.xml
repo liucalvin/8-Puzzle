@@ -55,7 +55,7 @@
         android:background="@color/colorPrimaryLight"
         android:text="@string/scramble"
         android:textAllCaps="false"
-        android:textColor="@color/colorBlack"
+        android:textColor="@color/colorPrimaryText"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

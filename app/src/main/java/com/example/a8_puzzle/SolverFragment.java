@@ -1,6 +1,7 @@
 package com.example.a8_puzzle;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 public class SolverFragment extends Fragment {
     
+    private static final String TAG = "Solver Fragment";
     private EditText number1, number2, number3, number4, number5, number6, number7, number8, number9;
     private Button solveButton;
     private View view;
@@ -44,15 +46,40 @@ public class SolverFragment extends Fragment {
         number8 = view.findViewById(R.id.solver_tile8);
         number9 = view.findViewById(R.id.solver_tile9);
         solveButton = view.findViewById(R.id.solver_solve_button);
+    
         solveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+    
+                // send the solver data
+                String solverData = getSolverData();
+                Bundle bundle = new Bundle();
+                bundle.putString("solverKey", solverData);
+    
+                SolverStepsFragment solverStepsFragment = new SolverStepsFragment();
+                solverStepsFragment.setArguments(bundle);
+                Log.d(TAG, "Bundle args sent: " + solverData);
+    
+                // move to solver steps fragment
                 FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.main_container, new SolverStepsFragment());
+                fragmentTransaction.replace(R.id.main_container, solverStepsFragment);
                 fragmentTransaction.commit();
             }
         });
-        
-        
+    
+    
+    }
+    
+    private String getSolverData() {
+        String sb = String.valueOf(number1.getText()) +
+                            number2.getText() +
+                            number3.getText() +
+                            number4.getText() +
+                            number5.getText() +
+                            number6.getText() +
+                            number7.getText() +
+                            number8.getText() +
+                            number9.getText();
+        return sb;
     }
 }

@@ -103,6 +103,7 @@
         android:id="@+id/solver_tile7"
         android:layout_width="80dp"
         android:layout_height="80dp"
+        android:layout_marginStart="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/number_tile_background"
         android:ems="10"
@@ -111,10 +112,24 @@
         android:textAlignment="center"
         android:textSize="54sp"
         app:layout_constraintBottom_toBottomOf="@+id/solver_background"
-        app:layout_constraintStart_toEndOf="@+id/solver_tile1" />
+        app:layout_constraintStart_toStartOf="@+id/solver_background" />
 
     <EditText
         android:id="@+id/solver_tile8"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/number_tile_background"
+        android:ems="10"
+        android:hint="0"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:textSize="54sp"
+        app:layout_constraintBottom_toBottomOf="@+id/solver_background"
+        app:layout_constraintStart_toEndOf="@+id/solver_tile7" />
+
+    <EditText
+        android:id="@+id/solver_tile9"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginEnd="8dp"
@@ -127,21 +142,6 @@
         android:textSize="54sp"
         app:layout_constraintBottom_toBottomOf="@+id/solver_background"
         app:layout_constraintEnd_toEndOf="@+id/solver_background" />
-
-    <EditText
-        android:id="@+id/solver_tile9"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/number_tile_background"
-        android:ems="10"
-        android:hint="0"
-        android:inputType="textPersonName"
-        android:textAlignment="center"
-        android:textSize="54sp"
-        app:layout_constraintBottom_toBottomOf="@+id/solver_background"
-        app:layout_constraintStart_toStartOf="@+id/solver_background" />
 
     <TextView
         android:id="@+id/textView2"
