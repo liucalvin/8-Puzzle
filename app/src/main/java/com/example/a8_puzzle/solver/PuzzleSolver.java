@@ -1,12 +1,16 @@
 package com.example.a8_puzzle.solver;
 
+import androidx.annotation.Nullable;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.PriorityQueue;
-import java.util.Stack;
 
 public class PuzzleSolver {
     
-    private Stack<Puzzle> steps;
-    private Node goalNode;
+    private List<Puzzle> steps;
+    private Node solvedNode;
     private boolean isSolvable;
     
     // find a solution using the A* algorithm
@@ -27,10 +31,10 @@ public class PuzzleSolver {
         while (true) {
             // delete min from priority queue
             Node delMin = solver.poll();
-            
-            // if deleted node is the goal, break
-            if (delMin.puzzle.isGoal()) {
-                goalNode = delMin;
+    
+            // if deleted node is the solved puzzle, break
+            if (delMin.puzzle.isSolved()) {
+                solvedNode = delMin;
                 isSolvable = true;
                 return;
             }
@@ -43,7 +47,6 @@ public class PuzzleSolver {
             }
         }
     }
-    
     
     // min number of moves to solve initial board
     public int moves() {
@@ -61,16 +64,24 @@ public class PuzzleSolver {
     }
     
     // sequence of boards in a shortest solution
-    public Iterable<Puzzle> solution() {
+    public List<Puzzle> solution() {
         if (steps == null) {
             // if solution() not called yet
-            steps = new Stack<>();
+            steps = new ArrayList<>();
             if (isSolvable) {
-                Node current = goalNode;
+                Node current = solvedNode;
                 while (current != null) {
-                    steps.push(current.puzzle);
+                    if (current.movement != null) {
+                        current.puzzle.setMovement(current.movement);
+                    } else {
+                        // first puzzle (with no previous node, so no movement)
+                        current.puzzle.setMovement("Starting puzzle: ");
+                    }
+                    steps.add(current.puzzle);
                     current = current.prevNode;
                 }
+                // steps were placed in reverse order (starting with the solved node)
+                Collections.reverse(steps);
                 return steps;
                 
             } else {
@@ -79,7 +90,7 @@ public class PuzzleSolver {
             }
             
         } else {
-            // else solution() has already been called; return the solution without iterating again
+            // else solution() has already been called; return the stored solution
             return steps;
         }
     }
@@ -91,14 +102,18 @@ public class PuzzleSolver {
         private final int numOfMoves;
         private final Node prevNode;
         private final int priority;
-        
-        
-        public Node(Puzzle puzzle, int numOfMoves, Node prevNode) {
+        private String movement;
+    
+    
+        public Node(Puzzle puzzle, int numOfMoves, @Nullable Node prevNode) {
             this.puzzle = puzzle;
             this.numOfMoves = numOfMoves;
             this.prevNode = prevNode;
             // define the priority function as its manhattan distance plus the number of moves so far.
             priority = puzzle.manhattanDistance() + this.numOfMoves;
+            if (prevNode != null) {
+                movement = prevNode.puzzle.movement(this.puzzle);
+            }
         }
         
         // implement Comparable methods for PriorityQueue

@@ -12,7 +12,7 @@
     <string name="solved">Solved!</string>
     <string name="scramble">Scramble</string>
     <string name="reset">Reset</string>
-    <string name="solver_instructions">Fill in the numbers to solve, using the number 0 for the blank tile.</string>
+    <string name="solver_instructions">Fill in the numbers to solve, leaving the empty space blank.</string>
     <string name="solve">Solve</string>
     <string name="solver_algorithm_description">The solver finds the minimum number of moves to solve
         a random input puzzle, using the A* graph searching algorithm, which uses heuristics to guide

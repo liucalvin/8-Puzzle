@@ -16,14 +16,14 @@
         app:layout_constraintBottom_toTopOf="@+id/solver_steps_reset"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/solver_steps_title" />
+        app:layout_constraintTop_toBottomOf="@+id/solver_steps_step_count" />
 
     <TextView
-        android:id="@+id/solver_steps_title"
+        android:id="@+id/solver_steps_step_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="@string/puzzle_solver_steps"
+        android:text="Steps: 0"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

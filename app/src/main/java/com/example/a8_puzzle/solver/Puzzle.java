@@ -1,15 +1,78 @@
 package com.example.a8_puzzle.solver;
 
+import com.example.a8_puzzle.Tile;
+
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
 import java.util.Stack;
 
 public class Puzzle {
     
     private static final int LENGTH = 3;
+    private static final String TAG = "Puzzle.java";
     private final int tiles[][];
+    private final List<Tile> tileList;
+    private String movement;
     
     public Puzzle(int[][] tiles) {
         this.tiles = copy(tiles);
+        tileList = toList(this.tiles);
+    }
+    
+    public List<Tile> getTileList() {
+        return tileList;
+    }
+    
+    private List<Tile> toList(int[][] tiles) {
+        List<Tile> tileList = new ArrayList<>();
+        int index = 0;
+        for (int i = 0; i < LENGTH; i++) {
+            for (int j = 0; j < LENGTH; j++) {
+                tileList.add(index, new Tile(tiles[i][j]));
+                index++;
+            }
+        }
+        return tileList;
+    }
+    
+    public String getMovement() {
+        return movement;
+    }
+    
+    public void setMovement(String movement) {
+        this.movement = movement;
+    }
+    
+    // compares this puzzle to the puzzle of the previous node and returns a description of the movement
+    public String movement(Puzzle moved) {
+        String direction;
+        int movedTileNum;
+        // find the moved tile
+        int[] initalBlankPosition = this.find(0);
+        int[] finalBlankPosition = moved.find(0);
+        movedTileNum = tiles[finalBlankPosition[0]][finalBlankPosition[1]];
+        // 4 cases:
+        // compare row; if initial > final, then the blank tile has been moved up,
+        // so the tile has been moved down.
+        if (initalBlankPosition[0] > finalBlankPosition[0]) {
+            direction = "down";
+            
+        } else if (initalBlankPosition[0] < finalBlankPosition[0]) {
+            // blank tile moved down, so tile moved up
+            direction = "up";
+            
+            // else the movement is horizontal
+            // blank tile moved left, so tile is moved right
+        } else if (initalBlankPosition[1] > finalBlankPosition[1]) {
+            direction = "right";
+            
+            // else must be left
+        } else {
+            direction = "left";
+        }
+        return String.format(Locale.CANADA, "Move tile %d %s", movedTileNum, direction);
     }
     
     private static int[][] copy(int[][] arr) {
@@ -47,6 +110,7 @@ public class Puzzle {
         return (LENGTH * a) + b + 1;
     }
     
+    // returns the [row, col] position of the 0 (blank) tile
     private int[] find(int num) {
         for (int i = 0; i < LENGTH; i++) {
             for (int j = 0; j < LENGTH; j++) {
@@ -54,24 +118,6 @@ public class Puzzle {
             }
         }
         return new int[]{};
-    }
-    
-    public Puzzle twin() {
-        
-        int[][] temp = copy(tiles);
-        
-        // choose two of (0,1), (0,0), or (1,0), depending on which is zero
-        // then exchange the non-zero ones.
-        if (tiles[0][0] != 0) {
-            if (tiles[0][1] != 0) {
-                exchange(temp, 0, 0, 0, 1);
-            } else {
-                exchange(temp, 0, 0, 1, 0);
-            }
-        } else {
-            exchange(temp, 0, 1, 1, 0);
-        }
-        return new Puzzle(temp);
     }
     
     // exchanges the elements in places [a1][a2] and [b1][b2]
@@ -82,7 +128,7 @@ public class Puzzle {
         arr[b1][b2] = temp;
     }
     
-    public boolean isGoal() {
+    public boolean isSolved() {
         int[][] goal = new int[LENGTH][LENGTH];
         for (int i = 0; i < LENGTH; i++) {
             for (int j = 0; j < LENGTH; j++) {
@@ -101,6 +147,40 @@ public class Puzzle {
         if (y.getClass() != this.getClass()) return false;
         Puzzle temp = (Puzzle) y;
         return Arrays.deepEquals(this.tiles, temp.tiles);
+    }
+    
+    private int[] convertTo1DArray(int[][] arr) {
+        int[] tempTiles = new int[LENGTH * LENGTH];
+        int count = 0;
+        for (int i = 0; i < LENGTH; i++) {
+            for (int j = 0; j < LENGTH; j++) {
+                tempTiles[count] = arr[i][j];
+                count++;
+            }
+        }
+        return tempTiles;
+    }
+    
+    public boolean isSolvable() {
+        // count the inversions: pairs of tiles i, j such that i < j and tiles[i] > tiles[j]
+        // for each tile, count how many tiles are greater than it down the list
+        int inversions = 0;
+        
+        int[] tempTiles = convertTo1DArray(tiles);
+        
+        for (int i = 0; i < LENGTH * LENGTH; i++) {
+            int current = tempTiles[i];
+            for (int j = i + 1; j < LENGTH * LENGTH; j++) {
+                int tileNum = tempTiles[j];
+                if (tileNum != 0) {  // only count the tiles, not the blank tile
+                    if (current > tileNum) {
+                        inversions++;
+                    }
+                }
+            }
+        }
+        // if there are an even number of inversions, the puzzle is valid
+        return inversions % 2 == 0;
     }
     
     // all neighboring puzzle instances (all possible switches with the 0 element / blank tile)

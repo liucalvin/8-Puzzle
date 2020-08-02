@@ -51,7 +51,7 @@ public class TilesAdapter extends BaseAdapter {
         tileNumber.setText(String.valueOf(tile.getNumber()));
         
         // make the blank tile invisible
-        if (tile.getNumber() == 9) {
+        if (tile.getNumber() == 9 || tile.getNumber() == 0) {
             tileNumber.setVisibility(View.INVISIBLE);
             tileNumber.setClickable(false);
         }

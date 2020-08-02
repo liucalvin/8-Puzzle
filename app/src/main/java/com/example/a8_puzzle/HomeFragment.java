@@ -1,6 +1,7 @@
 package com.example.a8_puzzle;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import java.util.Locale;
 public class HomeFragment extends Fragment implements AdapterView.OnItemClickListener, View.OnClickListener {
     
     private static final String TAG = "Home Fragment";
+    private static final int LENGTH = 3;
     private TilesAdapter tilesAdapter;
     private GridView gridView;
     private List<Tile> tiles;
@@ -84,8 +86,28 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
         tiles.clear();
         resetBoard();
         Collections.shuffle(tiles);
-        /*checkIfValid();*/
-        resetSteps();
+        if (!isValidPuzzle()) {
+            scrambleBoard();
+        }
+    }
+    
+    private boolean isValidPuzzle() {
+        int inversions = 0;
+        for (int i = 0; i < LENGTH * LENGTH - 1; i++) {
+            int frontTile = tiles.get(i).getNumber();
+            if (frontTile == 0) {
+                break;
+            }
+            for (int j = i + 1; j < LENGTH * LENGTH; j++) {
+                int backTile = tiles.get(j).getNumber();
+                if (frontTile > backTile && backTile != 0) {
+                    inversions++;
+                }
+            }
+        }
+        Log.d(TAG, "Number of Inversions: " + inversions);
+        // if even number of inversions, then the puzzle is valid.
+        return inversions % 2 == 0;
     }
     
     @Override
