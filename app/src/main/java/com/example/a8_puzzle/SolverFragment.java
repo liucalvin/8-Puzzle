@@ -22,10 +22,9 @@ public class SolverFragment extends Fragment {
     
     private static final String TAG = "Solver Fragment";
     private static final int LENGTH = 3;
-    private EditText number1, number2, number3, number4, number5, number6, number7, number8, number9;
     private List<EditText> numberTexts;
     private Button solveButton;
-    private View view;
+    private Button resetButton;
     
     public SolverFragment() {
         // Required empty public constructor
@@ -35,16 +34,16 @@ public class SolverFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_solver, container, false);
-        number1 = view.findViewById(R.id.solver_tile1);
-        number2 = view.findViewById(R.id.solver_tile2);
-        number3 = view.findViewById(R.id.solver_tile3);
-        number4 = view.findViewById(R.id.solver_tile4);
-        number5 = view.findViewById(R.id.solver_tile5);
-        number6 = view.findViewById(R.id.solver_tile6);
-        number7 = view.findViewById(R.id.solver_tile7);
-        number8 = view.findViewById(R.id.solver_tile8);
-        number9 = view.findViewById(R.id.solver_tile9);
+        View view = inflater.inflate(R.layout.fragment_solver, container, false);
+        EditText number1 = view.findViewById(R.id.solver_tile1);
+        EditText number2 = view.findViewById(R.id.solver_tile2);
+        EditText number3 = view.findViewById(R.id.solver_tile3);
+        EditText number4 = view.findViewById(R.id.solver_tile4);
+        EditText number5 = view.findViewById(R.id.solver_tile5);
+        EditText number6 = view.findViewById(R.id.solver_tile6);
+        EditText number7 = view.findViewById(R.id.solver_tile7);
+        EditText number8 = view.findViewById(R.id.solver_tile8);
+        EditText number9 = view.findViewById(R.id.solver_tile9);
         numberTexts = new ArrayList<>();
         numberTexts.add(number1);
         numberTexts.add(number2);
@@ -57,11 +56,12 @@ public class SolverFragment extends Fragment {
         numberTexts.add(number9);
     
         solveButton = view.findViewById(R.id.solver_solve_button);
-        resetNumbers();
+        resetButton = view.findViewById(R.id.solver_reset_button);
         return view;
     }
     
     private void resetNumbers() {
+        Log.d(TAG, "Resetting numbers");
         for (EditText et : numberTexts) {
             et.setText("");
         }
@@ -86,9 +86,9 @@ public class SolverFragment extends Fragment {
                     SolverStepsFragment solverStepsFragment = new SolverStepsFragment();
                     solverStepsFragment.setArguments(bundle);
                     Log.d(TAG, "Bundle args sent: " + solverData);
-                    
+    
                     // move to solver steps fragment
-                    FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    FragmentTransaction fragmentTransaction = requireActivity().getSupportFragmentManager().beginTransaction();
                     fragmentTransaction.replace(R.id.main_container, solverStepsFragment);
                     fragmentTransaction.commit();
                 } else {
@@ -96,8 +96,14 @@ public class SolverFragment extends Fragment {
                 }
             }
         });
-        
-        
+    
+        resetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resetNumbers();
+            }
+        });
+    
     }
     
     private boolean isValid(String solverData) {

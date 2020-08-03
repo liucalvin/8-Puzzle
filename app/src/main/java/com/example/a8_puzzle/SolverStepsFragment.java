@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,14 +25,11 @@ public class SolverStepsFragment extends Fragment {
     
     private static final String TAG = "SolverStepsFragment";
     private static final int LENGTH = 3;
-    private Toolbar toolbar;
-    private View view;
     private RecyclerView recyclerView;
-    private TextView stepCountText;
-    private SolverStepsAdapter solverStepsAdapter;
     private Button resetButton;
     private boolean solverDataReceived;
     private Puzzle puzzle;
+    private TextView stepCountText;
     
     public SolverStepsFragment() {
         // Required empty public constructor
@@ -61,11 +57,20 @@ public class SolverStepsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_solver_steps, container, false);
+        View view = inflater.inflate(R.layout.fragment_solver_steps, container, false);
         recyclerView = view.findViewById(R.id.solver_steps_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(container.getContext()));
         stepCountText = view.findViewById(R.id.solver_steps_step_count);
         resetButton = view.findViewById(R.id.solver_steps_reset);
+    
+        if (solverDataReceived) {
+            PuzzleSolver puzzleSolver = new PuzzleSolver(puzzle);
+            SolverStepsAdapter solverStepsAdapter = new SolverStepsAdapter(puzzleSolver.solution());
+            String steps = String.valueOf(solverStepsAdapter.getItemCount());
+            stepCountText.setText(String.format("Steps: %s", steps));
+            recyclerView.setAdapter(solverStepsAdapter);
+        }
+    
         return view;
     
     }
@@ -78,27 +83,21 @@ public class SolverStepsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // move back to solver page
-                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                FragmentTransaction fragmentTransaction = requireActivity().getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.main_container, new SolverFragment());
                 fragmentTransaction.commit();
             }
         });
-    
-        if (solverDataReceived) {
-            PuzzleSolver puzzleSolver = new PuzzleSolver(puzzle);
-            solverStepsAdapter = new SolverStepsAdapter(puzzleSolver.solution());
-            /*  stepCountText.setText(solverStepsAdapter.getItemCount());*/
-            recyclerView.setAdapter(solverStepsAdapter);
-        }
-    
-    
     }
     
     /**
      * @param puzzleData the String puzzleData received from SolverFragment
      * @return an instance of Puzzle.java from the given data, null if puzzle is invalid
      */
-    private Puzzle convertDataToPuzzle(String puzzleData) {
+    private Puzzle convertDataToPuzzle(@Nullable String puzzleData) {
+        if (puzzleData == null) {
+            return null;
+        }
         if (puzzleData.length() != LENGTH * LENGTH) {
             return null;
         }
@@ -117,5 +116,4 @@ public class SolverStepsFragment extends Fragment {
             return null;
         }
     }
-    
 }

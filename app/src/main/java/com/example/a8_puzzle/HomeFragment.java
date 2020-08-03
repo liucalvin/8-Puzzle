@@ -25,9 +25,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
     private GridView gridView;
     private List<Tile> tiles;
     private TextView stepCounter, solvedText;
-    private Button resetButton, scrambleButton;
     private Tile blankTile;
-    private View view;
     private int stepCount;
     private boolean boardIsClickable;
     
@@ -44,20 +42,20 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_home, container, false);
-        
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+    
         stepCounter = view.findViewById(R.id.home_step_counter);
         solvedText = view.findViewById(R.id.home_solved_text);
-        resetButton = view.findViewById(R.id.home_reset_button);
-        scrambleButton = view.findViewById(R.id.home_scramble_button);
-
+        Button resetButton = view.findViewById(R.id.home_reset_button);
+        Button scrambleButton = view.findViewById(R.id.home_scramble_button);
+    
         tiles = new ArrayList<>(9);
         scrambleBoard();
-        
+    
         gridView = view.findViewById(R.id.home_gridview);
         tilesAdapter = new TilesAdapter(tiles, view.getContext());
         gridView.setAdapter(tilesAdapter);
-        
+    
         gridView.setOnItemClickListener(this);
         resetButton.setOnClickListener(this);
         scrambleButton.setOnClickListener(this);

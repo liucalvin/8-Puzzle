@@ -1,6 +1,5 @@
 package com.example.a8_puzzle;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +15,7 @@ import java.util.List;
 
 public class SolverStepsAdapter extends RecyclerView.Adapter<SolverStepsAdapter.ViewHolder> {
     
-    private static final String TAG = "SolverStepsAdapter";
     private List<Puzzle> solverSteps;
-    private Context context;
     
     public SolverStepsAdapter(List<Puzzle> solverSteps) {
         this.solverSteps = solverSteps;
@@ -28,14 +25,13 @@ public class SolverStepsAdapter extends RecyclerView.Adapter<SolverStepsAdapter.
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.solver_list_step, parent, false);
-        context = parent.getContext();
         return new ViewHolder(view);
     }
     
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         // recieve data and set it for each position in list
-        
+    
         holder.setIsRecyclable(false);      // turn off recycling of views
         holder.setGridView(solverSteps.get(position).getTileList());
         holder.setMovementText(solverSteps.get(position).getMovement());
@@ -46,11 +42,10 @@ public class SolverStepsAdapter extends RecyclerView.Adapter<SolverStepsAdapter.
         return solverSteps.size();
     }
     
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         
-        private TilesAdapter tilesAdapter;
         private View mView;
-        private TextView movementText, stepCountText;
+        private TextView movementText;
         private GridView gridView;
         
         public ViewHolder(@NonNull View itemView) {
@@ -66,7 +61,7 @@ public class SolverStepsAdapter extends RecyclerView.Adapter<SolverStepsAdapter.
         }
         
         protected void setGridView(List<Tile> singleTileList) {
-            tilesAdapter = new TilesAdapter(singleTileList, mView.getContext());
+            TilesAdapter tilesAdapter = new TilesAdapter(singleTileList, mView.getContext());
             gridView.setAdapter(tilesAdapter);
         }
     }
