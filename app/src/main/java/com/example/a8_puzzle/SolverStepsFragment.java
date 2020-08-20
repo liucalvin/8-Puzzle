@@ -66,7 +66,8 @@ public class SolverStepsFragment extends Fragment {
         if (solverDataReceived) {
             PuzzleSolver puzzleSolver = new PuzzleSolver(puzzle);
             SolverStepsAdapter solverStepsAdapter = new SolverStepsAdapter(puzzleSolver.solution());
-            String steps = String.valueOf(solverStepsAdapter.getItemCount());
+            String steps = String.valueOf(solverStepsAdapter.getItemCount() - 1);
+            // subtract one, because the initial board is counted
             stepCountText.setText(String.format("Steps: %s", steps));
             recyclerView.setAdapter(solverStepsAdapter);
         }

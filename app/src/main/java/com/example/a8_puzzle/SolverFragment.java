@@ -31,6 +31,12 @@ public class SolverFragment extends Fragment {
     }
     
     @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        resetNumbers();
+    }
+    
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -54,7 +60,7 @@ public class SolverFragment extends Fragment {
         numberTexts.add(number7);
         numberTexts.add(number8);
         numberTexts.add(number9);
-    
+        
         solveButton = view.findViewById(R.id.solver_solve_button);
         resetButton = view.findViewById(R.id.solver_reset_button);
         return view;
