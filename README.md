@@ -1,6 +1,8 @@
 # 8-Puzzle
 8-puzzle game on android, with a solver capable of solving any random legal board. 
 
+Try it out on your android device here by downloading the .apk file here: https://drive.google.com/file/d/1creAR3vjqmPvqnZA8tW_lJpr5ubSZcAW/view?usp=sharing
+
 The solver finds the minimum number of moves (the least-cost path) to solve a random input puzzle, using the A* graph searching algorithm, which uses heuristics to guide its search (a best-first search). The heuristic in this algorithm uses the manhattan distance, which is the sum of the displacements of each tile from its solved state. 
 
 The heuristic function in this algorithm uses the sum of the manhattan distance and the number of moves made so far. Intuitively, a move that results in a puzzle with tiles closer to the solved puzzle, and that reaches this state with the least number of moves is the best one. 
