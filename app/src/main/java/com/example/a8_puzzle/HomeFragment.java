@@ -1,7 +1,6 @@
 package com.example.a8_puzzle;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,27 +84,66 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
         resetBoard();
         Collections.shuffle(tiles);
         if (!isValidPuzzle()) {
-            scrambleBoard();
+            if (tiles.get(0).getNumber() == 0) {
+                switchTiles(1, 2);
+            } else if (tiles.get(1).getNumber() == 0) {
+                switchTiles(0, 2);
+            } else {
+                switchTiles(1, 2);
+            }
         }
     }
     
     private boolean isValidPuzzle() {
+    
+        /*int[][] puzzleTiles = new int[LENGTH][LENGTH];
+        int k = 0;
+        for (int i = 0; i < LENGTH; i++) {
+            for (int j = 0; j < LENGTH; j++) {
+                int a = tiles.get(k).getNumber();
+                if (a == 9) {
+                    a = 0;
+                }
+                puzzleTiles[i][j] = a;
+                k++;
+            }
+        }
+        Log.d(TAG, Arrays.deepToString(puzzleTiles));
+        Puzzle puzzle = new Puzzle(puzzleTiles);
+        PuzzleSolver puzzleSolver = new PuzzleSolver(puzzle);
+        if (puzzleSolver.solution() == null) {
+            if (tiles.get(0).getNumber() == 0) {
+                switchTiles(1, 2);
+            } else if (tiles.get(1).getNumber() == 0) {
+                switchTiles(0, 2);
+            } else {
+                switchTiles(1, 2);
+            }
+        }*/
+    
         int inversions = 0;
         for (int i = 0; i < LENGTH * LENGTH - 1; i++) {
             int frontTile = tiles.get(i).getNumber();
-            if (frontTile == 0) {
-                break;
-            }
-            for (int j = i + 1; j < LENGTH * LENGTH; j++) {
-                int backTile = tiles.get(j).getNumber();
-                if (frontTile > backTile && backTile != 0) {
-                    inversions++;
+            if (frontTile != 0) {
+                for (int j = i + 1; j < LENGTH * LENGTH; j++) {
+                    int backTile = tiles.get(j).getNumber();
+                    if (frontTile > backTile && backTile != 0) {
+                        inversions++;
+                    }
                 }
             }
         }
-        Log.d(TAG, "Number of Inversions: " + inversions);
+//        Log.e(TAG, "************** Number of Inversions: " + inversions);
         // if even number of inversions, then the puzzle is valid.
         return inversions % 2 == 0;
+    }
+    
+    private void switchTiles(int i, int j) {
+        int a = tiles.get(i).getNumber();
+        tiles.remove(i);
+        tiles.add(i, tiles.get(i));
+        tiles.remove(j);
+        tiles.add(j, new Tile(a));
     }
     
     @Override
@@ -115,7 +153,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
             // exchange the tile with the blank tile
             int blankTileIndex = tiles.indexOf(blankTile);
             exchangeTiles(position, blankTileIndex);
-    
+            
             stepCount++;
             stepCounter.setText(String.format(Locale.CANADA, "Steps: %d", stepCount));
             tilesAdapter.notifyDataSetChanged();

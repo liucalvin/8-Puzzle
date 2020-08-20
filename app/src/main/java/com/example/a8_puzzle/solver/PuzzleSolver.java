@@ -9,13 +9,13 @@ import java.util.PriorityQueue;
 
 public class PuzzleSolver {
     
+    private static final String TAG = "PuzzleSolver.java";
     private List<Puzzle> steps;
     private Node solvedNode;
     private boolean isSolvable;
     
     // find a solution using the A* algorithm
     public PuzzleSolver(Puzzle initial) {
-        
         Node initialNode = new Node(initial, 0, null);
         
         // Java's PriorityQueue is a minimum one by default (ordered in ascending order)
