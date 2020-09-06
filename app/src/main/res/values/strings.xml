@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">Cool 8 Puzzle</string>
+    <string name="home">Home</string>
+    <string name="solver">Solver</string>
+    <string name="info">Info</string>
+    <string name="how_to_play_instructions">Move the tiles into the blank space to make the pattern
+        shown above, by tapping on the tile you want to move.</string>
+    <string name="info_description">The 8-Puzzle was invented by Noyes Palmer Chapman around 1874.
+        It was originally a 4-by-4 grid, and called the 15-Puzzle. This is a simplified 3-by-3 version. </string>
+    <string name="how_to_play">How To Play</string>
+    <string name="help">Help</string>
+    <string name="solved">Solved!</string>
+    <string name="scramble">Scramble</string>
+    <string name="reset">Reset</string>
+    <string name="solver_instructions">Fill in the numbers to solve, leaving the empty space blank.</string>
+    <string name="solve">Solve</string>
+    <string name="solver_algorithm_description">The solver finds the minimum number of moves to solve
+        a random input puzzle, using the A* graph searching algorithm, which uses heuristics to guide
+        its search.
+        \n\nThe heuristic function in this algorithm uses the sum of the manhattan distance
+        (sum of the absolute differences of the coordinates of each tile compared to each tile on
+        the solved puzzle) and the number of moves made so far. Intuitively, a move that results in a
+        puzzle with tiles closer to the solved puzzle, and that reaches this state with the least
+        number of moves is the best one.
+        \n\nThe algorithm is implemented using a priority queue with search nodes containing a single puzzle
+        state, a priority, and the previous search node. At each step, all possible nodes containing
+        adjacent puzzle instances are added, and the one with lowest priority is polled. Once the solved
+        puzzle is reached, the steps are retraced by calling the previous node of each search node.
+    </string>
+    <string name="solver_algorithm">Solver Algorithm</string>
+    <string name="credits">Created with Kotlin by Calvin Liu, 2020</string>
+    <string name="puzzle_solver_steps">Puzzle Solver Steps:</string>
+    <string name="steps">"Steps: %1$d"</string>
+</resources>

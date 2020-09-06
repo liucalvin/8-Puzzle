@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/solver_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/puzzle_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/solver_instructions" />
+
+    <EditText
+        android:id="@+id/solver_tile1"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/number_tile_background"
+        android:ems="10"
+        android:hint="0"
+        android:imeOptions="actionNext"
+        android:nextFocusForward="@id/solver_tile2"
+        android:inputType="number"
+        android:textAlignment="center"
+        android:textSize="54sp"
+        app:layout_constraintStart_toStartOf="@+id/solver_background"
+        app:layout_constraintTop_toTopOf="@+id/solver_background" />
+
+    <EditText
+        android:id="@+id/solver_tile2"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/number_tile_background"
+        android:ems="10"
+        android:hint="0"
+        android:imeOptions="actionNext"
+        android:nextFocusForward="@id/solver_tile3"
+        android:inputType="number"
+        android:textAlignment="center"
+        android:textSize="54sp"
+        app:layout_constraintStart_toEndOf="@+id/solver_tile1"
+        app:layout_constraintTop_toTopOf="@+id/solver_background" />
+
+    <EditText
+        android:id="@+id/solver_tile3"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/number_tile_background"
+        android:ems="10"
+        android:hint="0"
+        android:imeOptions="actionNext"
+        android:nextFocusForward="@id/solver_tile4"
+        android:inputType="number"
+        android:textAlignment="center"
+        android:textSize="54sp"
+        app:layout_constraintEnd_toEndOf="@+id/solver_background"
+        app:layout_constraintTop_toTopOf="@+id/solver_background" />
+
+    <EditText
+        android:id="@+id/solver_tile4"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/number_tile_background"
+        android:ems="10"
+        android:hint="0"
+        android:imeOptions="actionNext"
+        android:nextFocusForward="@id/solver_tile5"
+        android:inputType="number"
+        android:textAlignment="center"
+        android:textSize="54sp"
+        app:layout_constraintStart_toStartOf="@+id/solver_background"
+        app:layout_constraintTop_toBottomOf="@+id/solver_tile1" />
+
+    <EditText
+        android:id="@+id/solver_tile5"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/number_tile_background"
+        android:ems="10"
+        android:hint="0"
+        android:imeOptions="actionNext"
+        android:nextFocusForward="@id/solver_tile6"
+        android:inputType="number"
+        android:textAlignment="center"
+        android:textSize="54sp"
+        app:layout_constraintStart_toEndOf="@+id/solver_tile1"
+        app:layout_constraintTop_toBottomOf="@+id/solver_tile2" />
+
+    <EditText
+        android:id="@+id/solver_tile6"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/number_tile_background"
+        android:ems="10"
+        android:hint="0"
+        android:imeOptions="actionNext"
+        android:nextFocusForward="@id/solver_tile7"
+        android:inputType="number"
+        android:textAlignment="center"
+        android:textSize="54sp"
+        app:layout_constraintEnd_toEndOf="@+id/solver_background"
+        app:layout_constraintTop_toBottomOf="@+id/solver_tile3" />
+
+    <EditText
+        android:id="@+id/solver_tile7"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/number_tile_background"
+        android:ems="10"
+        android:hint="0"
+        android:imeOptions="actionNext"
+        android:nextFocusForward="@id/solver_tile8"
+        android:inputType="number"
+        android:textAlignment="center"
+        android:textSize="54sp"
+        app:layout_constraintBottom_toBottomOf="@+id/solver_background"
+        app:layout_constraintStart_toStartOf="@+id/solver_background" />
+
+    <EditText
+        android:id="@+id/solver_tile8"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/number_tile_background"
+        android:ems="10"
+        android:hint="0"
+        android:imeOptions="actionNext"
+        android:nextFocusForward="@id/solver_tile9"
+        android:textAlignment="center"
+        android:inputType="number"
+        android:textSize="54sp"
+        app:layout_constraintBottom_toBottomOf="@+id/solver_background"
+        app:layout_constraintStart_toEndOf="@+id/solver_tile7" />
+
+    <EditText
+        android:id="@+id/solver_tile9"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/number_tile_background"
+        android:ems="10"
+        android:hint="0"
+        android:imeOptions="actionDone"
+        android:inputType="number"
+        android:textAlignment="center"
+        android:textSize="54sp"
+        app:layout_constraintBottom_toBottomOf="@+id/solver_background"
+        app:layout_constraintEnd_toEndOf="@+id/solver_background" />
+
+    <TextView
+        android:id="@+id/solver_instructions"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="24dp"
+        android:text="@string/solver_instructions"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/solver_solve_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:background="@color/colorPrimaryLight"
+        android:text="@string/solve"
+        android:textAllCaps="false"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/solver_background" />
+
+    <Button
+        android:id="@+id/solver_reset_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@color/colorPrimaryLight"
+        android:text="@string/reset"
+        android:textAllCaps="false"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/solver_solve_button"
+        app:layout_constraintVertical_bias="0.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

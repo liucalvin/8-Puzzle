@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <ImageView
+        android:id="@+id/solver_list_step_background"
+        android:layout_width="260dp"
+        android:layout_height="260dp"
+        android:layout_marginBottom="24dp"
+        android:src="@drawable/puzzle_background"
+        app:layout_constraintBottom_toTopOf="@+id/solver_list_step_line"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <GridView
+        android:id="@+id/solver_list_step_gridview"
+        android:layout_width="242dp"
+        android:layout_height="242dp"
+        android:background="@drawable/puzzle_background"
+        android:numColumns="3"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@+id/solver_list_step_background"
+        app:layout_constraintEnd_toEndOf="@+id/solver_list_step_background"
+        app:layout_constraintStart_toStartOf="@+id/solver_list_step_background"
+        app:layout_constraintTop_toTopOf="@+id/solver_list_step_background">
+
+    </GridView>
+
+    <TextView
+        android:id="@+id/solver_list_step_movement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="24dp"
+        android:text="Step 0: Move 0 down"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/solver_list_step_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/solver_list_step_line"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="8dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/puzzle_background" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
