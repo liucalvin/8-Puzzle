@@ -1,7 +1,7 @@
 # Cool8Puzzle
 8 puzzle game on Android, written in Kotlin, with a solver capable of solving any random legal board. 
 
-Try it out on your android device here by downloading the .apk file here: 
+Try it out on your android device here by downloading the .apk file here: https://drive.google.com/file/d/19CmGJLkYqqdgmwejVBUt-HI9resNBcBF/view?usp=sharing
 
 You can try solving a random board: 
 
