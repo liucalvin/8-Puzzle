@@ -1,7 +1,6 @@
 package com.example.cool8puzzle
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -87,11 +86,9 @@ class SolverFragment : Fragment() {
                 fragmentTransaction.commit()
             } else {
                 // else solver data is not valid
-                Toast.makeText(
-                    context,
-                    "Please enter the puzzle correctly. ",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(context, "Please enter the puzzle correctly. ", Toast.LENGTH_SHORT)
+                    .show()
+//                Log.d(TAG, "solverData: $solverData")
             }
         }
         resetButton.setOnClickListener { resetNumbers() }
@@ -126,6 +123,8 @@ class SolverFragment : Fragment() {
     private val solverData: String
         get() {
             val sb = StringBuilder()
+            sb.clear()
+//            Log.d(TAG, "Solver data: ${sb.toString()}")
             for (et in numberTexts) {
 
                 // if the text is blank, append 0 for the blank tile
@@ -133,10 +132,14 @@ class SolverFragment : Fragment() {
                     sb.append(0)
                 } else {
                     sb.append(et.text.toString())
-                    Log.d(TAG, "Appending ${et.text.toString()}")
                 }
+//                Log.d(TAG, "Appending ${et.text.toString()}")
+//                Log.d(TAG, "Solver data: ${sb.toString()}")
             }
-            Log.d(TAG, "Solver data: ${sb.toString()}")
+            if (sb.length > 9) {
+                val len = sb.length / 9
+                return sb.toString().substring((len - 1) * 9)
+            }
             return sb.toString()
         }
 }

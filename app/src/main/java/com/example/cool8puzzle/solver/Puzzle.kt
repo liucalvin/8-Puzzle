@@ -1,6 +1,5 @@
 package com.example.cool8puzzle.solver
 
-import com.example.cool8puzzle.Tile
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.math.abs
@@ -46,7 +45,7 @@ class Puzzle(tiles: Array<IntArray>) {
         numList.clear()
         for (i in 0 until LENGTH) {
             for (j in 0 until LENGTH) {
-                numList.add(Tile(tiles[i][j]).number)
+                numList.add(tiles[i][j])
                 index++
             }
         }

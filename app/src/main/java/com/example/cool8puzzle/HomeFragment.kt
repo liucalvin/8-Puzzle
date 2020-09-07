@@ -1,7 +1,6 @@
 package com.example.cool8puzzle
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +10,7 @@ import android.widget.Button
 import android.widget.GridView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import kotlin.math.abs
 
 class HomeFragment : Fragment(), OnItemClickListener,
     View.OnClickListener {
@@ -23,7 +23,11 @@ class HomeFragment : Fragment(), OnItemClickListener,
     private var stepCount = 0
     private var boardIsClickable = false
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         // Inflate the layout for this fragment
         val view: View = inflater.inflate(R.layout.fragment_home, container, false)
         stepCounter = view.findViewById(R.id.home_step_counter)
@@ -65,12 +69,13 @@ class HomeFragment : Fragment(), OnItemClickListener,
         tiles.clear()
         resetBoard()
         tiles.shuffle()
-        if (!isValidPuzzle) {
+        while (!isValidPuzzle) {
+//            Log.d(TAG, "tiles[0]: ${tiles[0]}, tiles[1]: ${tiles[1]}, tiles[2]: ${tiles[2]} ")
             when {
-                tiles[0] == 0 -> {
+                tiles[0] == 9 -> {
                     switchTiles(1, 2)
                 }
-                tiles[1] == 0 -> {
+                tiles[1] == 9 -> {
                     switchTiles(0, 2)
                 }
                 else -> {
@@ -86,26 +91,30 @@ class HomeFragment : Fragment(), OnItemClickListener,
             var inversions = 0
             for (i in 0 until LENGTH * LENGTH - 1) {
                 val frontTile: Int = tiles[i]
-                if (frontTile != 0) {
+                if (frontTile != blankTile) {
                     for (j in i + 1 until LENGTH * LENGTH) {
                         val backTile: Int = tiles[j]
-                        if (frontTile > backTile && backTile != 0) {
+                        if (frontTile > backTile && backTile != blankTile) {
                             inversions++
                         }
                     }
                 }
             }
-            //        Log.e(TAG, "************** Number of Inversions: " + inversions);
+//                    Log.e(TAG, "************** Number of Inversions: $inversions");
             // if even number of inversions, then the puzzle is valid.
             return inversions % 2 == 0
         }
 
     private fun switchTiles(i: Int, j: Int) {
-        val a: Int = tiles[i]
-        tiles.removeAt(i)
-        tiles.add(i, tiles[i])
-        tiles.removeAt(j)
-        tiles.add(j, a)
+        val temp = tiles[i]
+        tiles[i] = tiles[j]
+        tiles[j] = temp
+        /*   tiles.removeAt(i)
+           tiles.add(i, b)
+           tiles.removeAt(j)
+           tiles.add(j, a)*/
+//        Log.d(TAG, "Switching $a at position $i and $b and position $j")
+//        Log.d(TAG, "Switched: tiles[0]: ${tiles[0]}, tiles[1]: ${tiles[1]}, tiles[2]: ${tiles[2]} ")
     }
 
     override fun onItemClick(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
@@ -116,7 +125,7 @@ class HomeFragment : Fragment(), OnItemClickListener,
             exchangeTiles(position, blankTileIndex)
             stepCount++
             stepCounter.text = getString(R.string.steps, stepCount)
-
+//            Log.d(TAG, isValidPuzzle.toString())
             tilesAdapter.notifyDataSetChanged()
             gridView.adapter = tilesAdapter
             gridView.invalidateViews()
@@ -142,10 +151,10 @@ class HomeFragment : Fragment(), OnItemClickListener,
         val pos = mapToArray(position)
         val correct = mapToArray(tiles.indexOf(blankTile))
         if (pos[0] != correct[0]) {
-            count += Math.abs(pos[0] - correct[0])
+            count += abs(pos[0] - correct[0])
         }
         if (pos[1] != correct[1]) {
-            count += Math.abs(pos[1] - correct[1])
+            count += abs(pos[1] - correct[1])
         }
         return count == 1
     }
@@ -188,7 +197,7 @@ class HomeFragment : Fragment(), OnItemClickListener,
     }
 
     companion object {
-        private const val TAG = "Home Fragment"
+        //        private const val TAG = "Home Fragment"
         private const val LENGTH = 3
     }
 }

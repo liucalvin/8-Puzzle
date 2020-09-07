@@ -1,7 +1,6 @@
 package com.example.cool8puzzle
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -56,7 +55,7 @@ class SolverStepsFragment : Fragment() {
         if (solverDataReceived && puzzle != null) {
             val puzzleSolver = PuzzleSolver(puzzle!!)
             val solverStepsAdapter = SolverStepsAdapter(puzzleSolver.solution()!!)
-            Log.d(TAG, "Puzzle solver solution: ${puzzleSolver.solution()}")
+//            Log.d(TAG, "Puzzle solver solution: ${puzzleSolver.solution()}")
             val steps = (solverStepsAdapter.itemCount - 1).toString().toInt()
             // subtract one, because the initial board is counted
             stepCountText.text = getString(R.string.steps, steps)
@@ -98,7 +97,7 @@ class SolverStepsFragment : Fragment() {
                 tiles[i][j] = puzzleData[index++].toString().toInt()
             }
         }
-        Log.d(TAG, tiles.contentDeepToString())
+//        Log.d(TAG, tiles.contentDeepToString())
         val puzzle = Puzzle(tiles)
         return if (puzzle.isSolvable()) {
             puzzle
