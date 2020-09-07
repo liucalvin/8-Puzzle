@@ -5,13 +5,13 @@ Try it out on your android device here by downloading the .apk file here: https:
 
 You can try solving a random board: 
 
-<img src = "https://github.com/liucalvin/Cool8Puzzle/blob/master/Files/screenrecording1.gif">
+![game play](Files/screenrecording1.gif)
 
 
 Or find the steps to solve any input board:
 
+![puzzle solver](Files/screenrecording2.gif)
 
-<img src = "https://github.com/liucalvin/Cool8Puzzle/blob/master/Files/screenrecording2.gif">
 
 # Solver Algorithm
 The solver finds the minimum number of moves (the least-cost path) to solve a random input puzzle, using the A* graph searching algorithm, which uses heuristics to guide its search (a best-first search). The heuristic in this algorithm uses the manhattan distance, which is the sum of the displacements of each tile from its solved state. 
