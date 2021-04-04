@@ -1,4 +1,4 @@
-package com.example.cool8puzzle
+package com.example.cool8puzzle.ui
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,14 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
+import com.example.cool8puzzle.R
 
 class TilesAdapter(
-    private val tiles: List<Int>,
     private val context: Context
 ) : BaseAdapter() {
 
-    companion object {
-        private const val TAG = "TilesAdapter"
+    private var tiles: List<Int> = listOf()
+
+    fun submitList(list: List<Int>) {
+        tiles = list
+        notifyDataSetChanged()
     }
 
     override fun getCount(): Int {
@@ -29,27 +32,29 @@ class TilesAdapter(
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
-        // get tile
-        var temp = convertView
+        var view = convertView
         val tile = tiles[position]
 
-        // instantiate a new cell view using the tile layout file
-        // if convertView is null, assign it; otherwise return it
-        if (temp == null) {
+        if (convertView == null) {
             val layoutInflater = LayoutInflater.from(context)
-            temp = layoutInflater.inflate(R.layout.tile_layout, parent, false)
+            view = layoutInflater.inflate(R.layout.item_tile, parent, false)
         }
 
         // set the text to the number of the tile
-        val tileNumber = temp!!.findViewById<TextView>(R.id.tile_layout_number)
+        val tileNumber = view!!.findViewById<TextView>(R.id.number)
         tileNumber.text = tile.toString()
 
-        // make the blank tile invisible
-        if (tile == 9 || tile == 0) {
-            tileNumber.visibility = View.INVISIBLE
-            tileNumber.isClickable = false
+        return view.apply {
+            setBlankTile(tile == 9 || tile == 0)
         }
-        return temp
     }
 
+    private fun View.setBlankTile(isBlank: Boolean) {
+        isEnabled = !isBlank
+        visibility = if (isBlank) {
+            View.INVISIBLE
+        } else {
+            View.VISIBLE
+        }
+    }
 }

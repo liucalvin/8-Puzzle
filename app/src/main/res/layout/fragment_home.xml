@@ -4,27 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeFragment">
-
+    tools:context=".ui.fragments.HomeFragment">
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="260dp"
         android:layout_height="260dp"
         android:src="@drawable/puzzle_background"
-        app:layout_constraintBottom_toTopOf="@+id/home_reset_button"
+        app:layout_constraintBottom_toTopOf="@+id/reset_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/home_solved_text"
-        app:layout_constraintVertical_bias="0.481" />
+        app:layout_constraintTop_toBottomOf="@+id/step_counter" />
 
     <GridView
-        android:id="@+id/home_gridview"
-        android:layout_width="242dp"
-        android:layout_height="242dp"
+        android:id="@+id/gridview"
+        style="@style/TileGridView"
         android:background="@drawable/puzzle_background"
-        android:numColumns="3"
-        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
         app:layout_constraintStart_toStartOf="@+id/imageView"
@@ -33,25 +28,27 @@
     </GridView>
 
     <Button
-        android:id="@+id/home_reset_button"
+        android:id="@+id/reset_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="80dp"
         android:background="@color/colorPrimaryLight"
         android:text="@string/reset"
         android:textAllCaps="false"
         android:textColor="@color/colorBlack"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/home_scramble_button"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/scramble_button"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/home_scramble_button"
+        android:id="@+id/scramble_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="64dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="80dp"
         android:background="@color/colorPrimaryLight"
         android:text="@string/scramble"
         android:textAllCaps="false"
@@ -60,10 +57,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/reset_button" />
 
     <TextView
-        android:id="@+id/home_step_counter"
+        android:id="@+id/step_counter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
@@ -74,7 +71,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/home_solved_text"
+        android:id="@+id/solved_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -83,6 +80,6 @@
         android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/home_step_counter" />
+        app:layout_constraintTop_toBottomOf="@+id/step_counter" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

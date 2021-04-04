@@ -1,21 +1,16 @@
-package com.example.cool8puzzle.solver
+package com.example.cool8puzzle.entity
 
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.math.abs
 
-class Puzzle(tiles: Array<IntArray>) {
-    private val tiles: Array<IntArray>
-    private val numList = ArrayList<Int>()
+class Puzzle(private val tiles: Array<IntArray>) {
     var movement: String? = null
 
     companion object {
         private const val LENGTH = 3
-        private const val TAG = "Puzzle.java"
         private fun copy(arr: Array<IntArray>): Array<IntArray> {
-            val temp = Array(
-                LENGTH
-            ) { IntArray(LENGTH) }
+            val temp = Array(LENGTH) { IntArray(LENGTH) }
             for (i in 0 until LENGTH) {
                 System.arraycopy(arr[i], 0, temp[i], 0, LENGTH)
             }
@@ -30,57 +25,36 @@ class Puzzle(tiles: Array<IntArray>) {
         }
     }
 
-    init {
-        // create defensive copy of the tiles
-        this.tiles = copy(tiles)
-    }
-
-    fun getTileList(): ArrayList<Int> {
-
-        return toList(this.tiles)
-    }
-
-    private fun toList(tiles: Array<IntArray>): ArrayList<Int> {
-        var index = 0
-        numList.clear()
-        for (i in 0 until LENGTH) {
-            for (j in 0 until LENGTH) {
-                numList.add(tiles[i][j])
-                index++
-            }
-        }
-        return numList
+    fun getTileList(): List<Int> {
+        return tiles.flatMap { it.asList() }
     }
 
     // compares this puzzle to the puzzle of the previous node and returns a description of the movement
     fun movement(moved: Puzzle): String {
-        val direction: String
-        val movedTileNum: Int
         // find the moved tile
         val initialBlankPosition = this.find(0)
         val finalBlankPosition = moved.find(0)
-        movedTileNum = tiles[finalBlankPosition[0]][finalBlankPosition[1]]
-        // 4 cases:
-        // compare row; if initial > final, then the blank tile has been moved up,
-        // so the tile has been moved down.
-        direction = when {
+        val movedTileNum = tiles[finalBlankPosition[0]][finalBlankPosition[1]]
+
+        val direction = when {
+            // 4 cases: compare row first
             initialBlankPosition[0] > finalBlankPosition[0] -> {
-                "down"
+                // if initial > final, then the blank tile has been moved up,
+                // so the tile has been moved down.
+                DIRECTION.DOWN.direction
             }
             initialBlankPosition[0] < finalBlankPosition[0] -> {
                 // blank tile moved down, so tile moved up
-                "up"
-
-                // else the movement is horizontal
-                // blank tile moved left, so tile is moved right
+                DIRECTION.UP.direction
             }
             initialBlankPosition[1] > finalBlankPosition[1] -> {
-                "right"
-
-                // else must be left
+                // otherwise the movement is horizontal
+                // blank tile moved left, so tile is moved right
+                DIRECTION.RIGHT.direction
             }
             else -> {
-                "left"
+                // otherwise must be left
+                DIRECTION.LEFT.direction
             }
         }
         return "Move tile $movedTileNum $direction"
@@ -126,7 +100,7 @@ class Puzzle(tiles: Array<IntArray>) {
     }
 
     // maps a tile's coordinates to its tile number
-    // maps [0,0] to [1]
+    // e.g. maps [0,0] to [1]
     private fun convertTo1DArray(arr: Array<IntArray>): IntArray {
         val tempTiles = IntArray(LENGTH * LENGTH)
         var count = 0
@@ -140,7 +114,7 @@ class Puzzle(tiles: Array<IntArray>) {
     }
 
     // maps a tile's number to its original spot on the plane
-    // maps [1] to [0,0]
+    // e.g. maps [1] to [0,0]
     private fun mapToArray(num: Int): IntArray {
         val a = (num - 1) / LENGTH
         val b = (num - 1) % LENGTH
@@ -157,35 +131,21 @@ class Puzzle(tiles: Array<IntArray>) {
         return intArrayOf()
     }
 
-    // for the bottom right index = 0
-    val isSolved: Boolean
-        get() {
-            val goal = Array(
-                LENGTH
-            ) { IntArray(LENGTH) }
-            for (i in 0 until LENGTH) {
-                for (j in 0 until LENGTH) {
-                    goal[j][i] =
-                        LENGTH * j + i + 1
-                }
+    fun isSolved(): Boolean {
+        val goal = Array(LENGTH) { IntArray(LENGTH) }
+        for (i in 0 until LENGTH) {
+            for (j in 0 until LENGTH) {
+                goal[j][i] = LENGTH * j + i + 1
             }
-            // for the bottom right index = 0
-            goal[LENGTH - 1][LENGTH - 1] = 0
-            return tiles.contentDeepEquals(goal)
         }
-
-    override fun equals(other: Any?): Boolean {
-        if (other === this) return true
-        if (other == null) return false
-        if (other.javaClass != this.javaClass) return false
-        val temp = other as Puzzle
-        return tiles.contentDeepEquals(temp.tiles)
+        // for the bottom right index = 0
+        goal[LENGTH - 1][LENGTH - 1] = 0
+        return tiles.contentDeepEquals(goal)
     }
 
     // all neighboring puzzle instances (all possible switches with the 0 element / blank tile)
     fun neighbors(): Iterable<Puzzle> {
-        val puzzles =
-            Stack<Puzzle>()
+        val puzzles = Stack<Puzzle>()
         val zeroLocation = find(0)
         val a1 = zeroLocation[0]
         val a2 = zeroLocation[1]
@@ -214,9 +174,10 @@ class Puzzle(tiles: Array<IntArray>) {
         return puzzles
     }
 
-    override fun toString(): String {
-        return "Puzzle(tiles=${tiles.contentToString()}, tileList=${getTileList()}, movement=$movement\n)"
+    enum class DIRECTION(val direction: String) {
+        DOWN("down"),
+        UP("up"),
+        LEFT("left"),
+        RIGHT("right")
     }
-
-
 }

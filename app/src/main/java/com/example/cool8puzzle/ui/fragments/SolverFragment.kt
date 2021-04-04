@@ -1,4 +1,4 @@
-package com.example.cool8puzzle
+package com.example.cool8puzzle.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.cool8puzzle.R
 import java.util.*
 
 class SolverFragment : Fragment() {
@@ -81,9 +82,9 @@ class SolverFragment : Fragment() {
 //                 Log.d(TAG, "Bundle args sent: " + solverData);
 
                 // move to solver steps fragment
-                val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
-                fragmentTransaction.replace(R.id.main_container, solverStepsFragment)
-                fragmentTransaction.commit()
+//                val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
+//                fragmentTransaction.replace(R.id.main_container, solverStepsFragment)
+//                fragmentTransaction.commit()
             } else {
                 // else solver data is not valid
                 Toast.makeText(context, "Please enter the puzzle correctly. ", Toast.LENGTH_SHORT)
