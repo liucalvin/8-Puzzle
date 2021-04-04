@@ -48,7 +48,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), OnItemClickListener, View
                 }
 
                 stepCount.asLiveData().observe(viewLifecycleOwner) { stepCount ->
-                    binding.stepCounter.text = getString(R.string.steps, stepCount)
+                    binding.stepCounter.text = getString(R.string.steps, stepCount.toInt())
                 }
 
                 boardIsClickable.asLiveData().observe(viewLifecycleOwner) { isClickable ->
