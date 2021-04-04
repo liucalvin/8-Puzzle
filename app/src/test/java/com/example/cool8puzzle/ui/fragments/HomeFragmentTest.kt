@@ -5,21 +5,13 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.testing.FragmentScenario
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.lifecycle.Lifecycle
-import androidx.test.core.app.ActivityScenario
 import com.example.cool8puzzle.ui.viewmodels.HomeViewModel
-import com.example.cool8puzzle.ui.viewmodels.mockHomeViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.koin.androidx.viewmodel.dsl.viewModel
-import org.koin.core.context.loadKoinModules
-import org.koin.dsl.module
 import org.koin.test.AutoCloseKoinTest
-import org.mockito.kotlin.whenever
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
@@ -32,10 +24,10 @@ class HomeFragmentTest: AutoCloseKoinTest() {
 
     @Before
     fun setup() {
-        homeViewModel = mockHomeViewModel()
-        loadKoinModules(listOf(module {
-            viewModel { mockHomeViewModel() }
-        }))
+//        homeViewModel = mockHomeViewModel()
+//        loadKoinModules(listOf(module {
+//            viewModel { mockHomeViewModel() }
+//        }))
     }
 
     @After
