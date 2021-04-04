@@ -1,20 +1,17 @@
-package com.example.cool8puzzle
+package com.example.cool8puzzle.ui
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.GridView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.cool8puzzle.solver.Puzzle
+import com.example.cool8puzzle.R
+import com.example.cool8puzzle.entity.Puzzle
+import com.example.cool8puzzle.ui.fragments.HomeFragment
 
 class SolverStepsAdapter(private val solverSteps: List<Puzzle>) :
     RecyclerView.Adapter<SolverStepsAdapter.ViewHolder>() {
-
-    companion object {
-        private const val TAG = "SolverStepsAdapter"
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -42,9 +39,8 @@ class SolverStepsAdapter(private val solverSteps: List<Puzzle>) :
         }
 
         fun setGridView(singleTileList: List<Int>) {
-            val tilesAdapter = TilesAdapter(singleTileList, mView.context)
-//            Log.d(TAG, "TileList: $singleTileList")
-            gridView.adapter = tilesAdapter
+//            val tilesAdapter = TilesAdapter(singleTileList, mView.context)
+//            gridView.adapter = tilesAdapter
         }
     }
 }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Cool 8 Puzzle</string>
+    <string name="app_name">8 Puzzle</string>
     <string name="home">Home</string>
     <string name="solver">Solver</string>
     <string name="info">Info</string>

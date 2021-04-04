@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+<!--    <fragment-->
+<!--        android:id="@+id/infoFragment"-->
+<!--        android:name="com.example.cool8puzzle.ui.fragments.InfoFragment"-->
+<!--        android:label="fragment_info"-->
+<!--        tools:layout="@layout/fragment_info" />-->
+<!--    <fragment-->
+<!--        android:id="@+id/solverStepsFragment"-->
+<!--        android:name="com.example.cool8puzzle.ui.fragments.SolverStepsFragment"-->
+<!--        android:label="fragment_solver_steps"-->
+<!--        tools:layout="@layout/fragment_solver_steps" />-->
+<!--    <fragment-->
+<!--        android:id="@+id/homeFragment"-->
+<!--        android:name="com.example.cool8puzzle.ui.fragments.HomeFragment"-->
+<!--        android:label="fragment_home"-->
+<!--        tools:layout="@layout/fragment_home" />-->
+<!--    <fragment-->
+<!--        android:id="@+id/solverFragment"-->
+<!--        android:name="com.example.cool8puzzle.ui.fragments.SolverFragment"-->
+<!--        android:label="fragment_solver"-->
+<!--        tools:layout="@layout/fragment_solver" />-->
+</navigation>

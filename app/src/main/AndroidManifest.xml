@@ -2,6 +2,7 @@
     package="com.example.cool8puzzle">
 
     <application
+        android:name=".MainApplication"
         android:allowBackup="true"
         android:icon="@drawable/icon_8_puzzle_good"
         android:label="@string/app_name"
@@ -9,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,4 +1,4 @@
-package com.example.cool8puzzle
+package com.example.cool8puzzle.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,8 +10,10 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.cool8puzzle.solver.Puzzle
+import com.example.cool8puzzle.R
+import com.example.cool8puzzle.entity.Puzzle
 import com.example.cool8puzzle.solver.PuzzleSolver
+import com.example.cool8puzzle.ui.SolverStepsAdapter
 
 class SolverStepsFragment : Fragment() {
     private lateinit var resetButton: Button
@@ -69,12 +71,12 @@ class SolverStepsFragment : Fragment() {
         savedInstanceState: Bundle?
     ) {
         super.onViewCreated(view, savedInstanceState)
-        resetButton.setOnClickListener { // move back to solver page
-            val fragmentTransaction =
-                requireActivity().supportFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.main_container, SolverFragment())
-            fragmentTransaction.commit()
-        }
+//        resetButton.setOnClickListener { // move back to solver page
+//            val fragmentTransaction =
+//                requireActivity().supportFragmentManager.beginTransaction()
+//            fragmentTransaction.replace(R.id.main_container, SolverFragment())
+//            fragmentTransaction.commit()
+//        }
     }
 
     /**

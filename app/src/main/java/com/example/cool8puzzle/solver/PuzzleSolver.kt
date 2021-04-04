@@ -1,15 +1,18 @@
 package com.example.cool8puzzle.solver
 
-import java.util.*
+// find a solution using the A* algorithm
 
-class PuzzleSolver(initial: Puzzle) {
+import com.example.cool8puzzle.entity.Puzzle
+import java.util.PriorityQueue
+
+class PuzzleSolver @JvmOverloads constructor(initial: Puzzle? = null, size: Int? = null) {
+
     private var steps: MutableList<Puzzle>? = null
     private var solvedNode: Node? = null
     private var isSolvable = false
 
-    // find a solution using the A* algorithm
     init {
-        val initialNode = Node(initial, 0, null)
+        val initialNode = Node(initial ?: randomBoard(size), 0, null)
 
         // Java's PriorityQueue is a minimum one by default (ordered in ascending order)
         val solver = PriorityQueue<Node>()
@@ -19,6 +22,20 @@ class PuzzleSolver(initial: Puzzle) {
         solve(solver)
     }
 
+    private fun randomBoard(size: Int?): Puzzle {
+        val n = size ?: 3
+        val array = Array(n) { IntArray(n) { 0 } }
+        val set = (0 until n * n).shuffled().toMutableSet()
+        for (i in 0 until n) {
+            for (j in 0 until n) {
+                array[i][j] = set.first().apply {
+                    set.remove(this)
+                }
+            }
+        }
+        return Puzzle(array)
+    }
+
     private fun solve(solver: PriorityQueue<Node>) {
         while (true) {
             // delete min from priority queue
@@ -26,7 +43,7 @@ class PuzzleSolver(initial: Puzzle) {
 
             if (delMin != null) {
                 // if deleted node is the solved puzzle, break
-                if (delMin.puzzle.isSolved) {
+                if (delMin.puzzle.isSolved()) {
                     solvedNode = delMin
                     isSolvable = true
                     return
@@ -93,12 +110,15 @@ class PuzzleSolver(initial: Puzzle) {
             steps
         }
     }
-    // create immutable object Node to represent each state of the puzzle tiles
+
+    // create Node to represent each state of the puzzle tiles
     private class Node(
         val puzzle: Puzzle,
         val numOfMoves: Int,
         val prevNode: Node?
     ) : Comparable<Node> {
+
+        // define the priority function as its manhattan distance plus the number of moves so far.
         private val priority: Int = puzzle.manhattanDistance() + numOfMoves
 
         var movement: String? = null
@@ -106,21 +126,16 @@ class PuzzleSolver(initial: Puzzle) {
         // implement Comparable methods for PriorityQueue
         override fun compareTo(other: Node): Int {
             return when {
-                priority > other.priority -> +1
+                priority > other.priority -> 1
                 priority < other.priority -> -1
                 else -> numOfMoves.compareTo(other.numOfMoves)
             }
         }
+
         init {
-            // define the priority function as its manhattan distance plus the number of moves so far.
             if (prevNode != null) {
                 movement = prevNode.puzzle.movement(puzzle)
             }
         }
-
-    }
-    companion object {
-        private const val TAG = "PuzzleSolver.java"
-
     }
 }
