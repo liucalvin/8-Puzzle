@@ -5,7 +5,7 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-    
+
   workflow_dispatch:
 
 jobs:
@@ -17,13 +17,17 @@ jobs:
 
       - name: Build the app
         run: ./gradlew build
-    
+
   unit-tests:
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v2
-      
+
       - name: Unit tests
         run: ./gradlew test
+
+  coverage:
+    - name: Codecov
+      uses: codecov/codecov-action@v1.3.1
 
