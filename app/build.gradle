@@ -2,14 +2,14 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'jacoco'
 }
 
-tasks.withType(Test) {
-    testLogging {
-        exceptionFormat "full"
-        events "started", "skipped", "passed", "failed"
-        showStandardStreams true
-    }
+repositories {
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+}
+jacoco {
+    toolVersion = '0.8.7-SNAPSHOT'
 }
 
 android {
