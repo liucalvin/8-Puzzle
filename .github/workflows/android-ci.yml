@@ -18,16 +18,28 @@ jobs:
       - name: Build the app
         run: ./gradlew build
 
-  unit-tests:
+  unit-test:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
+      - name: Unit Test
+        run: ./gradlew testDebugUnitTest
 
-      - name: Unit tests
-        run: ./gradlew test
+          - name: generate report
+            uses: actions/upload-artifact@v2
+            with:
+              name: report
+              path: app/build/reports/coverage/debug
 
-  coverage:
-    - name: Codecov
-      uses: codecov/codecov-action@v1.3.1
+
+          - name: Download Test Reports Folder
+            uses: actions/download-artifact@v2
+            with:
+              name: report
+              path: app/build/reports/coverage/debug
+
+          - name: Upload Test Report
+            run:  bash <(curl -s https://codecov.io/bash) -f "app/build/reports/coverage/debug/report.xml"
+
 
