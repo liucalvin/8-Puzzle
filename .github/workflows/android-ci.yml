@@ -11,29 +11,28 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Build the app
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build
         run: ./gradlew build
 
   unit-test:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Unit Test
         run: ./gradlew testDebugUnitTest
 
       - name: Generate Report
-      - uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v2
         with:
           name: report
           path: app/build/reports/coverage/debug
 
       - name: Download Test Reports Folder
-      - uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v2
         with:
           name: report
           path: app/build/reports/coverage/debug
