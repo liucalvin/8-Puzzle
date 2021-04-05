@@ -11,14 +11,17 @@ tasks.withType(Test) {
         events "started", "skipped", "passed", "failed"
         showStandardStreams true
     }
+    jacoco.includeNoLocationClasses = true
     jacoco.excludes = ['jdk.internal.*']
 }
 
 repositories {
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
 }
+
 jacoco {
     toolVersion = '0.8.7-SNAPSHOT'
+    reportsDir = file("${project.buildDir}/reports/jacoco")
 }
 
 task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'createDebugCoverageReport']) {
