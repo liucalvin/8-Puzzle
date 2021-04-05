@@ -5,6 +5,14 @@ plugins {
     id 'jacoco'
 }
 
+tasks.withType(Test) {
+    testLogging {
+        exceptionFormat "full"
+        events "started", "skipped", "passed", "failed"
+        showStandardStreams true
+    }
+}
+
 repositories {
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
 }
