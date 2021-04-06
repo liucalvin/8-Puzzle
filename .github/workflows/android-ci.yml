@@ -11,35 +11,33 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Build the app
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build
         run: ./gradlew build
 
   unit-test:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Unit Test
-        run: ./gradlew testDebugUnitTest
+        run: ./gradlew testDebugUnitTest jacocoTestReport
 
-          - name: generate report
-            uses: actions/upload-artifact@v2
-            with:
-              name: report
-              path: app/build/reports/coverage/debug
+      - name: Generate Report
+        uses: actions/upload-artifact@v2
+        with:
+          name: report
+          path: app/build/reports/coverage/debug
 
+      - name: Download Test Reports Folder
+        uses: actions/download-artifact@v2
+        with:
+          name: report
+          path: app/build/reports/coverage/debug
 
-          - name: Download Test Reports Folder
-            uses: actions/download-artifact@v2
-            with:
-              name: report
-              path: app/build/reports/coverage/debug
-
-          - name: Upload Test Report
-            run:  bash <(curl -s https://codecov.io/bash) -f "app/build/reports/coverage/debug/report.xml"
-
-
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+            token: ${{ secrets.CODECOV_TOKEN }}
