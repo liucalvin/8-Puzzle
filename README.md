@@ -1,4 +1,6 @@
-# Cool8Puzzle
+# 8 Puzzle
+![GitHub branch checks state](https://img.shields.io/github/checks-status/liucalvin/8-Puzzle/main) ![Codecov](https://img.shields.io/codecov/c/github/liucalvin/8-Puzzle)
+
 8 puzzle game on Android, written in Kotlin, with a solver capable of solving any random legal board. 
 
 Try it out on your android device here by downloading the .apk file here: https://drive.google.com/file/d/19CmGJLkYqqdgmwejVBUt-HI9resNBcBF/view?usp=sharing
