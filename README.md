@@ -1,5 +1,7 @@
 # 8 Puzzle
-![GitHub branch checks state](https://img.shields.io/github/checks-status/liucalvin/8-Puzzle/main) ![Codecov](https://img.shields.io/codecov/c/github/liucalvin/8-Puzzle)
+
+
+![android ci](https://github.com/liucalvin/8-Puzzle/actions/workflows/android-ci.yml/badge.svg) [![coverage](https://codecov.io/gh/liucalvin/8-Puzzle/branch/main/graph/badge.svg?token=P07CKN957S)](https://codecov.io/gh/liucalvin/8-Puzzle)
 
 8 puzzle game on Android, written in Kotlin, with a solver capable of solving any random legal board. 
 
