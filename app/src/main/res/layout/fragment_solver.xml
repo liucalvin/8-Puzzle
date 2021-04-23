@@ -17,150 +17,97 @@
         app:layout_constraintTop_toBottomOf="@+id/solver_instructions" />
 
     <EditText
+        style="@style/SolverInputStyle"
         android:id="@+id/solver_tile1"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
         android:layout_marginStart="7dp"
         android:layout_marginTop="7dp"
-        android:background="@drawable/number_tile_background"
-        android:ems="10"
-        android:hint="0"
         android:imeOptions="actionNext"
-        android:inputType="number"
         android:nextFocusForward="@id/solver_tile2"
-        android:textAlignment="center"
-        android:textSize="54sp"
         app:layout_constraintStart_toStartOf="@+id/solver_background"
         app:layout_constraintTop_toTopOf="@+id/solver_background" />
 
     <EditText
+        style="@style/SolverInputStyle"
         android:id="@+id/solver_tile2"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
         android:layout_marginStart="1dp"
         android:layout_marginTop="7dp"
-        android:background="@drawable/number_tile_background"
-        android:ems="10"
-        android:hint="0"
         android:imeOptions="actionNext"
         android:inputType="number"
         android:nextFocusForward="@id/solver_tile3"
-        android:textAlignment="center"
-        android:textSize="54sp"
         app:layout_constraintStart_toEndOf="@+id/solver_tile1"
         app:layout_constraintTop_toTopOf="@+id/solver_background" />
 
     <EditText
+        style="@style/SolverInputStyle"
         android:id="@+id/solver_tile3"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
         android:layout_marginTop="7dp"
         android:layout_marginEnd="7dp"
-        android:background="@drawable/number_tile_background"
-        android:ems="10"
-        android:hint="0"
         android:imeOptions="actionNext"
         android:inputType="number"
         android:nextFocusForward="@id/solver_tile4"
-        android:textAlignment="center"
-        android:textSize="54sp"
         app:layout_constraintEnd_toEndOf="@+id/solver_background"
         app:layout_constraintTop_toTopOf="@+id/solver_background" />
 
     <EditText
+        style="@style/SolverInputStyle"
         android:id="@+id/solver_tile4"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
         android:layout_marginStart="7dp"
         android:layout_marginTop="1dp"
-        android:background="@drawable/number_tile_background"
-        android:ems="10"
-        android:hint="0"
         android:imeOptions="actionNext"
         android:inputType="number"
         android:nextFocusForward="@id/solver_tile5"
-        android:textAlignment="center"
-        android:textSize="54sp"
         app:layout_constraintStart_toStartOf="@+id/solver_background"
         app:layout_constraintTop_toBottomOf="@+id/solver_tile1" />
 
     <EditText
+        style="@style/SolverInputStyle"
         android:id="@+id/solver_tile5"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
         android:layout_marginStart="1dp"
         android:layout_marginTop="1dp"
-        android:background="@drawable/number_tile_background"
-        android:ems="10"
-        android:hint="0"
         android:imeOptions="actionNext"
         android:inputType="number"
         android:nextFocusForward="@id/solver_tile6"
-        android:textAlignment="center"
-        android:textSize="54sp"
         app:layout_constraintStart_toEndOf="@+id/solver_tile1"
         app:layout_constraintTop_toBottomOf="@+id/solver_tile2" />
 
     <EditText
+        style="@style/SolverInputStyle"
         android:id="@+id/solver_tile6"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
         android:layout_marginTop="1dp"
         android:layout_marginEnd="7dp"
-        android:background="@drawable/number_tile_background"
-        android:ems="10"
-        android:hint="0"
         android:imeOptions="actionNext"
         android:inputType="number"
         android:nextFocusForward="@id/solver_tile7"
-        android:textAlignment="center"
-        android:textSize="54sp"
         app:layout_constraintEnd_toEndOf="@+id/solver_background"
         app:layout_constraintTop_toBottomOf="@+id/solver_tile3" />
 
     <EditText
+        style="@style/SolverInputStyle"
         android:id="@+id/solver_tile7"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
         android:layout_marginStart="7dp"
         android:layout_marginBottom="7dp"
-        android:background="@drawable/number_tile_background"
-        android:ems="10"
-        android:hint="0"
         android:imeOptions="actionNext"
         android:inputType="number"
         android:nextFocusForward="@id/solver_tile8"
-        android:textAlignment="center"
-        android:textSize="54sp"
         app:layout_constraintBottom_toBottomOf="@+id/solver_background"
         app:layout_constraintStart_toStartOf="@+id/solver_background" />
 
     <EditText
+        style="@style/SolverInputStyle"
         android:id="@+id/solver_tile8"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
         android:layout_marginStart="1dp"
         android:layout_marginBottom="7dp"
-        android:background="@drawable/number_tile_background"
-        android:ems="10"
-        android:hint="0"
         android:imeOptions="actionNext"
         android:inputType="number"
         android:nextFocusForward="@id/solver_tile9"
-        android:textAlignment="center"
-        android:textSize="54sp"
         app:layout_constraintBottom_toBottomOf="@+id/solver_background"
         app:layout_constraintStart_toEndOf="@+id/solver_tile7" />
 
     <EditText
+        style="@style/SolverInputStyle"
         android:id="@+id/solver_tile9"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
         android:layout_marginEnd="7dp"
         android:layout_marginBottom="7dp"
-        android:background="@drawable/number_tile_background"
-        android:ems="10"
-        android:hint="0"
         android:imeOptions="actionDone"
         android:inputType="number"
         android:textAlignment="center"
@@ -183,7 +130,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/solver_solve_button"
+        android:id="@+id/solve_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -194,12 +141,12 @@
         android:textColor="@color/colorBlack"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/solver_reset_button"
+        app:layout_constraintEnd_toStartOf="@+id/reset_button"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/solver_reset_button"
+        android:id="@+id/reset_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
@@ -212,6 +159,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/solver_solve_button" />
+        app:layout_constraintStart_toEndOf="@+id/solve_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

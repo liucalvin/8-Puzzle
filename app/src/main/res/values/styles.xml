@@ -16,4 +16,15 @@
         <item name="android:textAlignment">center</item>
     </style>
 
+    <style name="SolverInputStyle">
+        <item name="android:layout_width">80dp</item>
+        <item name="android:layout_height">80dp</item>
+        <item name="android:background">@drawable/number_tile_background</item>
+        <item name="android:ems">10</item>
+        <item name="android:inputType">number</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">54sp</item>
+        <item name="android:hint">@string/solver_input_hint</item>
+    </style>
+
 </resources>

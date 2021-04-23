@@ -43,4 +43,7 @@
     <string name="credits">Created with Kotlin by Calvin Liu, 2020</string>
     <string name="puzzle_solver_steps">Puzzle Solver Steps:</string>
     <string name="steps">"Steps: %1$d"</string>
+    <string name="solver_input_hint">0</string>
+    <string name="solver_input_error_syntax">Please only enter numbers between 1 and 8.</string>
+    <string name="solver_input_error_repeats">Please only use each of the numbers from 1 to 8 once.</string>
 </resources>
