@@ -6,31 +6,32 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragments.SolverStepsFragment">
 
-
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/solver_steps_recycler_view"
+        android:id="@+id/solver_steps_list"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/solver_steps_reset"
+        app:layout_constraintBottom_toTopOf="@+id/reset"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/solver_steps_step_count" />
+        app:layout_constraintTop_toBottomOf="@+id/step_count"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/solver_steps_step_count"
+        android:id="@+id/step_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Steps: 0"
+        android:text="@string/solver_steps_count"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/solver_steps_reset"
+        android:id="@+id/reset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
@@ -41,5 +42,15 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/reset"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/step_count" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

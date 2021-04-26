@@ -1,5 +1,6 @@
 package com.example.cool8puzzle.di
 
+import com.example.cool8puzzle.solver.PuzzleSolver
 import com.example.cool8puzzle.ui.viewmodels.HomeViewModel
 import com.example.cool8puzzle.ui.viewmodels.InfoViewModel
 import com.example.cool8puzzle.ui.viewmodels.SolverStepsViewModel
@@ -11,14 +12,18 @@ val homeFragmentModule = module {
     viewModel { HomeViewModel() }
 }
 
-val infoViewModel = module {
+val infoViewModelModule = module {
     viewModel { InfoViewModel() }
 }
 
-val solverViewModel = module {
+val solverViewModelModule = module {
     viewModel { SolverViewModel() }
 }
 
-val solverStepsViewModel = module {
-    viewModel { SolverStepsViewModel() }
+val solverStepsViewModelModule = module {
+    viewModel { (puzzleData: String) -> SolverStepsViewModel(puzzleData, get()) }
+}
+
+val puzzleSolverModule = module {
+    single { PuzzleSolver() }
 }

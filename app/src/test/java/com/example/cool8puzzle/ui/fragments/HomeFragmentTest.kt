@@ -3,11 +3,11 @@ package com.example.cool8puzzle.ui.fragments
 import android.os.Build
 import android.widget.TextView
 import androidx.core.view.children
-import androidx.core.view.get
 import androidx.core.view.isVisible
 import androidx.fragment.app.testing.FragmentScenario
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.MutableLiveData
 import com.example.cool8puzzle.R
 import com.example.cool8puzzle.ui.viewmodels.HomeViewModel
 import com.example.cool8puzzle.ui.viewmodels.mockHomeViewModel
@@ -56,26 +56,22 @@ class HomeFragmentTest : AutoCloseKoinTest() {
             assertFalse(fragment.binding.solvedText.isVisible)
             assertTrue(fragment.binding.gridview.isEnabled)
         }
-
-
     }
 
-//    @Test
-//    fun `verify board is correctly displayed from viewmodel`() = runBlocking {
-//        val tileList = listOf(3, 7, 5, 1, 8, 2, 0, 4, 6)
-//        val tilesFlow = MutableStateFlow(tileList)
-//        fragmentScenario = launchFragmentInContainer<HomeFragment>().onFragment { fragment ->
-//            whenever(homeViewModel.tiles).thenReturn(tilesFlow)
-//            homeViewModel.resetBoard()
-//            homeViewModel.scrambleBoard()
-//            for (i in 0 until 9) {
-//                assertEquals(
-//                    fragment.binding.gridview.children.toList()[i].findViewById<TextView>(R.id.number).text,
-//                    tileList[i]
-//                )
-//            }
-//        }
-//    }
-
-
+    @Test
+    fun `verify board is correctly displayed from viewmodel`() = runBlocking {
+        val tileList = listOf(3, 7, 5, 1, 8, 2, 0, 4, 6)
+        val tilesFlow = MutableStateFlow(tileList)
+        fragmentScenario = launchFragmentInContainer<HomeFragment>().onFragment { fragment ->
+            whenever(homeViewModel.tiles).thenReturn(tilesFlow)
+            homeViewModel.resetBoard()
+            homeViewModel.scrambleBoard()
+            fragment.binding.gridview.children.asIterable().forEachIndexed { index, view ->
+                assertEquals(
+                    view.findViewById<TextView>(R.id.number).text,
+                    tileList[index]
+                )
+            }
+        }
+    }
 }

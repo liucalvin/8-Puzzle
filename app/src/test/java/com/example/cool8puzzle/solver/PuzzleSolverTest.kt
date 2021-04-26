@@ -3,7 +3,6 @@ package com.example.cool8puzzle.solver
 import com.example.cool8puzzle.entity.Puzzle
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
-import org.junit.Before
 import org.junit.Test
 
 class PuzzleSolverTest {

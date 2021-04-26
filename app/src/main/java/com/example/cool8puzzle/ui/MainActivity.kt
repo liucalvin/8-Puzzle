@@ -4,13 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import androidx.viewbinding.ViewBinding
 import com.example.cool8puzzle.R
 import com.example.cool8puzzle.databinding.ActivityMainBinding
-import com.example.cool8puzzle.ui.fragments.HomeFragment
-import com.example.cool8puzzle.ui.fragments.InfoFragment
-import com.example.cool8puzzle.ui.fragments.SolverFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,28 +21,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val infoFragment = InfoFragment()
-        val solverFragment = SolverFragment()
-        val homeFragment = HomeFragment()
+        val navController = findNavController(R.id.nav_host_fragment_container)
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.homeFragment, R.id.solverFragment, R.id.infoFragment
+            )
+        )
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        binding.bottomNavigation.setupWithNavController(navController)
 
-        replaceFragment(homeFragment)
-
-        binding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.infoFragment -> replaceFragment(infoFragment)
-                R.id.solverFragment -> replaceFragment(solverFragment)
-                R.id.homeFragment -> replaceFragment(homeFragment)
-            }
-            true
-        }
-
-    }
-
-    private fun replaceFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction().apply {
-            replace(R.id.nav_host_fragment_container, fragment)
-            commit()
-        }
     }
 
 }

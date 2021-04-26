@@ -1,11 +1,13 @@
 package com.example.cool8puzzle.ui.viewmodels
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.example.cool8puzzle.entity.Puzzle
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.spy
 import org.mockito.kotlin.whenever
-
 
 fun mockHomeViewModel(
         mockTiles: StateFlow<List<Int>> = MutableStateFlow(emptyList()),
@@ -18,3 +20,7 @@ fun mockHomeViewModel(
     whenever(boardIsClickable).thenReturn(clickable)
     whenever(boardIsSolved).thenReturn(solved)
 }
+
+fun mockSolverStepsViewModel(
+    puzzleData: String
+) = spy(SolverStepsViewModel(puzzleData, mock()))

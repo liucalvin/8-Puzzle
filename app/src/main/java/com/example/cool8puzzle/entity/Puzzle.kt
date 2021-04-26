@@ -83,7 +83,7 @@ class Puzzle(private val tiles: Array<IntArray>) {
     }
 
     // manhattan distance is used as the heuristic in the search algorithm
-    // finds the sum of the displacements (sum of vertical and horizonal distances) from a tile's solved spot
+    // finds the sum of the displacements (sum of vertical and horizontal distances) from a tile's solved spot
     fun manhattanDistance(): Int {
         var count = 0
         for (i in 1 until LENGTH * LENGTH) {   // from 1 to n^2 - 1 inclusive
@@ -143,7 +143,6 @@ class Puzzle(private val tiles: Array<IntArray>) {
         return tiles.contentDeepEquals(goal)
     }
 
-    // all neighboring puzzle instances (all possible switches with the 0 element / blank tile)
     fun neighbors(): Iterable<Puzzle> {
         val puzzles = Stack<Puzzle>()
         val zeroLocation = find(0)
@@ -172,6 +171,20 @@ class Puzzle(private val tiles: Array<IntArray>) {
             puzzles.push(Puzzle(temp))
         }
         return puzzles
+    }
+
+    private fun randomBoard(size: Int?): Puzzle {
+        val n = size ?: 3
+        val array = Array(n) { IntArray(n) { 0 } }
+        val set = (0 until n * n).shuffled().toMutableSet()
+        for (i in 0 until n) {
+            for (j in 0 until n) {
+                array[i][j] = set.first().apply {
+                    set.remove(this)
+                }
+            }
+        }
+        return Puzzle(array)
     }
 
     enum class DIRECTION(val direction: String) {

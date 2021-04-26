@@ -18,10 +18,13 @@
         app:menu="@menu/bottom_main_menu" />
 
 
-    <FrameLayout
+    <fragment
         android:id="@+id/nav_host_fragment_container"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        app:navGraph="@navigation/nav_graph"
+        app:defaultNavHost="true"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

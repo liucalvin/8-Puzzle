@@ -3,44 +3,66 @@ package com.example.cool8puzzle.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.GridView
-import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.cool8puzzle.R
+import com.example.cool8puzzle.databinding.ItemSolverStepBinding
 import com.example.cool8puzzle.entity.Puzzle
-import com.example.cool8puzzle.ui.fragments.HomeFragment
 
-class SolverStepsAdapter(private val solverSteps: List<Puzzle>) :
-    RecyclerView.Adapter<SolverStepsAdapter.ViewHolder>() {
+class SolverStepsAdapter : ListAdapter<Puzzle, SolverStepsViewHolder>(SolverStepsCallback()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.solver_list_step, parent, false)
-        return ViewHolder(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SolverStepsViewHolder {
+        return SolverStepsViewHolder.from(parent)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        // receive data and set it for each position in list
-        holder.setIsRecyclable(false) // turn off recycling of views
-        holder.setGridView(solverSteps[position].getTileList())
-//        Log.d(TAG, "gridview data: ${solverSteps[position].getTileList()}")
-        holder.setMovementText(solverSteps[position].movement)
+    override fun onBindViewHolder(holder: SolverStepsViewHolder, position: Int) {
+        holder.bind(getItem(position), position == itemCount - 1)
     }
 
-    override fun getItemCount(): Int {
-        return solverSteps.size
+
+}
+
+class SolverStepsCallback : DiffUtil.ItemCallback<Puzzle>() {
+    override fun areItemsTheSame(oldItem: Puzzle, newItem: Puzzle): Boolean {
+        return oldItem == newItem
     }
 
-    class ViewHolder(private val mView: View) : RecyclerView.ViewHolder(mView) {
-        private val movementText: TextView = mView.findViewById(R.id.solver_list_step_movement)
-        private val gridView: GridView = mView.findViewById(R.id.solver_list_step_gridview)
-        fun setMovementText(text: String?) {
-            movementText.text = text
+    override fun areContentsTheSame(oldItem: Puzzle, newItem: Puzzle): Boolean {
+        return oldItem.movement == newItem.movement &&
+                oldItem.getTileList() == newItem.getTileList()
+    }
+
+}
+
+class SolverStepsViewHolder(private val binding: ItemSolverStepBinding) :
+    RecyclerView.ViewHolder(binding.root) {
+
+    companion object {
+        fun from(parent: ViewGroup): SolverStepsViewHolder {
+            return SolverStepsViewHolder(
+                ItemSolverStepBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
         }
+    }
 
-        fun setGridView(singleTileList: List<Int>) {
-//            val tilesAdapter = TilesAdapter(singleTileList, mView.context)
-//            gridView.adapter = tilesAdapter
+    fun bind(item: Puzzle, isLast: Boolean) {
+        val adapter = TilesAdapter(binding.root.context)
+        binding.gridview.adapter = adapter
+        adapter.submitList(item.getTileList())
+        binding.movement.text = item.movement
+        binding.setDivider(isLast)
+    }
+
+    private fun ItemSolverStepBinding.setDivider(isLast: Boolean) {
+        divider.visibility = if (isLast) {
+            View.INVISIBLE
+        } else {
+            View.VISIBLE
         }
     }
 }
+

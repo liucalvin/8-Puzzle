@@ -2,6 +2,7 @@ package com.example.cool8puzzle.ui
 
 import android.os.Build
 import android.os.Looper.getMainLooper
+import androidx.navigation.fragment.NavHostFragment
 import androidx.test.core.app.ActivityScenario
 import com.example.cool8puzzle.R
 import com.example.cool8puzzle.ui.fragments.HomeFragment
@@ -34,20 +35,8 @@ class MainActivityTest: AutoCloseKoinTest() {
     @Test
     fun `verify home fragment is instantiated when activity starts`() {
         activityScenario = ActivityScenario.launch(MainActivity::class.java).onActivity { activity ->
-            val fragment = activity.supportFragmentManager.fragments.last()
-            assertTrue(fragment is HomeFragment)
-        }
-    }
-
-    @Test
-    fun `verify clicking on home button returns to the initial home fragment`() {
-        activityScenario = ActivityScenario.launch(MainActivity::class.java).onActivity { activity ->
-            val fragment = activity.supportFragmentManager.fragments.last()
-            assertTrue(fragment is HomeFragment)
-
-            activity.binding.bottomNavigation.findViewById<BottomNavigationItemView>(R.id.solverFragment).performClick()
-
-            assertEquals(fragment, activity.supportFragmentManager.fragments.last())
+            val navHostFragment = activity.supportFragmentManager.fragments.last() as NavHostFragment
+            assertTrue(navHostFragment.childFragmentManager.fragments.first() is HomeFragment)
         }
     }
 
@@ -57,8 +46,8 @@ class MainActivityTest: AutoCloseKoinTest() {
             activity.binding.bottomNavigation.findViewById<BottomNavigationItemView>(R.id.solverFragment).performClick()
             shadowOf(getMainLooper()).idle()
 
-            val fragment = activity.supportFragmentManager.fragments.last()
-            assertTrue(fragment is SolverFragment)
+            val navHostFragment = activity.supportFragmentManager.fragments.last() as NavHostFragment
+            assertTrue(navHostFragment.childFragmentManager.fragments.first() is SolverFragment)
         }
     }
 
@@ -68,8 +57,8 @@ class MainActivityTest: AutoCloseKoinTest() {
             activity.binding.bottomNavigation.findViewById<BottomNavigationItemView>(R.id.infoFragment).performClick()
             shadowOf(getMainLooper()).idle()
 
-            val fragment = activity.supportFragmentManager.fragments.last()
-            assertTrue(fragment is InfoFragment)
+            val navHostFragment = activity.supportFragmentManager.fragments.last() as NavHostFragment
+            assertTrue(navHostFragment.childFragmentManager.fragments.first() is InfoFragment)
         }
     }
 

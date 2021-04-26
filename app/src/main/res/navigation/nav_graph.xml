@@ -5,52 +5,35 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/homeFragment">
 
-<!--    <fragment-->
-<!--        android:id="@+id/infoFragment"-->
-<!--        android:name="com.example.cool8puzzle.ui.fragments.InfoFragment"-->
-<!--        android:label="fragment_info"-->
-<!--        tools:layout="@layout/fragment_info" />-->
-<!--    <fragment-->
-<!--        android:id="@+id/solverStepsFragment"-->
-<!--        android:name="com.example.cool8puzzle.ui.fragments.SolverStepsFragment"-->
-<!--        android:label="fragment_solver_steps"-->
-<!--        tools:layout="@layout/fragment_solver_steps" />-->
-<!--    <fragment-->
-<!--        android:id="@+id/homeFragment"-->
-<!--        android:name="com.example.cool8puzzle.ui.fragments.HomeFragment"-->
-<!--        android:label="fragment_home"-->
-<!--        tools:layout="@layout/fragment_home" />-->
-<!--    <fragment-->
-<!--        android:id="@+id/solverFragment"-->
-<!--        android:name="com.example.cool8puzzle.ui.fragments.SolverFragment"-->
-<!--        android:label="fragment_solver"-->
-<!--        tools:layout="@layout/fragment_solver" />-->
     <fragment
-        android:id="@+id/homeFragment2"
+        android:id="@+id/homeFragment"
         android:name="com.example.cool8puzzle.ui.fragments.HomeFragment"
-        android:label="fragment_home"
+        android:label="8 Puzzle"
         tools:layout="@layout/fragment_home" />
     <fragment
-        android:id="@+id/solverFragment2"
+        android:id="@+id/solverFragment"
         android:name="com.example.cool8puzzle.ui.fragments.SolverFragment"
-        android:label="fragment_solver"
-        tools:layout="@layout/fragment_solver" >
+        android:label="Puzzle Solver"
+        tools:layout="@layout/fragment_solver">
         <action
             android:id="@+id/action_solverFragment2_to_solverStepsFragment"
             app:destination="@id/solverStepsFragment" />
     </fragment>
     <fragment
-        android:id="@+id/infoFragment2"
+        android:id="@+id/infoFragment"
         android:name="com.example.cool8puzzle.ui.fragments.InfoFragment"
-        android:label="fragment_info"
+        android:label="Info"
         tools:layout="@layout/fragment_info" />
     <fragment
         android:id="@+id/solverStepsFragment"
         android:name="com.example.cool8puzzle.ui.fragments.SolverStepsFragment"
-        android:label="fragment_solver_steps"
-        tools:layout="@layout/fragment_solver_steps" >
+        android:label="Solver Steps"
+        tools:layout="@layout/fragment_solver_steps">
         <argument
             android:name="puzzle"
             app:argType="string" />
+        <action
+            android:id="@+id/action_solverStepsFragment_to_solverFragment"
+            app:destination="@id/solverFragment" />
     </fragment>
 </navigation>

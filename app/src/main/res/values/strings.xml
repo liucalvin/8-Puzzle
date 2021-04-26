@@ -46,4 +46,7 @@
     <string name="solver_input_hint">0</string>
     <string name="solver_input_error_syntax">Please only enter numbers between 1 and 8.</string>
     <string name="solver_input_error_repeats">Please only use each of the numbers from 1 to 8 once.</string>
+    <string name="puzzle_not_valid">Error: puzzle not valid</string>
+    <string name="puzzle_already_solved">Puzzle is already solved!</string>
+    <string name="solver_steps_count">Steps: —</string>
 </resources>
