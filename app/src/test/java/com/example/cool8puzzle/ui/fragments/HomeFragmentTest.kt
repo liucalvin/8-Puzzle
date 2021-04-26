@@ -7,7 +7,6 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.testing.FragmentScenario
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.MutableLiveData
 import com.example.cool8puzzle.R
 import com.example.cool8puzzle.ui.viewmodels.HomeViewModel
 import com.example.cool8puzzle.ui.viewmodels.mockHomeViewModel

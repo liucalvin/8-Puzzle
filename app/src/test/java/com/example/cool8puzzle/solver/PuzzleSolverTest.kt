@@ -21,10 +21,6 @@ class PuzzleSolverTest {
         solver = PuzzleSolver(puzzle)
         assertNotNull(solver.solution())
         assertEquals(solver.moves(), 0)
-    }
-
-    @Test
-    fun test2() {
 
         val puzzle2 = Puzzle(
             arrayOf(
@@ -36,10 +32,7 @@ class PuzzleSolverTest {
         solver = PuzzleSolver(puzzle2)
         assertNotNull(solver.solution())
         assertEquals(solver.moves(), 23)
-    }
 
-    @Test
-    fun test3() {
         val puzzle3 = Puzzle(
             arrayOf(
                 intArrayOf(2, 3, 6),

@@ -3,6 +3,7 @@ package com.example.cool8puzzle.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.VisibleForTesting
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -34,7 +35,7 @@ class SolverStepsCallback : DiffUtil.ItemCallback<Puzzle>() {
 
 }
 
-class SolverStepsViewHolder(private val binding: ItemSolverStepBinding) :
+class SolverStepsViewHolder(@VisibleForTesting val binding: ItemSolverStepBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
     companion object {
