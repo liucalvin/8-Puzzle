@@ -24,12 +24,6 @@ jobs:
       - name: Unit Test
         run: ./gradlew testDebugUnitTest jacocoTestReport
 
-      - name: Generate Report
-        uses: actions/upload-artifact@v2
-        with:
-          name: report
-          path: app/build/reports/jacoco/jacocoTestReport
-
       - name: Download Test Reports Folder
         uses: actions/download-artifact@v2
         with:
