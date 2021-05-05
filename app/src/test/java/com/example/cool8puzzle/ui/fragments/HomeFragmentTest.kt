@@ -36,7 +36,7 @@ class HomeFragmentTest : AutoCloseKoinTest() {
     fun setup() {
         homeViewModel = mockHomeViewModel()
         loadKoinModules(listOf(module {
-            viewModel(override = true) { mockHomeViewModel() }
+            viewModel(override = true) { homeViewModel }
         }))
     }
 

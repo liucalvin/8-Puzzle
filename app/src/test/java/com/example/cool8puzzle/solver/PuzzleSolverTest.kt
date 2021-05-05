@@ -46,7 +46,7 @@ class PuzzleSolverTest {
     }
 
     @Test
-    fun `verify invalid board returns empty solution`() {
+    fun `verify invalid board returns null solution`() {
         val puzzle = Puzzle(
             arrayOf(
                 intArrayOf(1, 2, 3),
@@ -54,10 +54,12 @@ class PuzzleSolverTest {
                 intArrayOf(8, 7, 0)
             )
         )
-        solver = PuzzleSolver(puzzle)
-        assertEquals(solver.moves(), -1)
-        assertEquals(solver.solution()!!.size, 0)
-        assertEquals(solver.moves(), -1)
+        solver = PuzzleSolver().apply {
+            solve(puzzle)
+            assertEquals(moves(), -1)
+            assertNull(solution())
+            assertEquals(moves(), -1)
+        }
     }
 
 }

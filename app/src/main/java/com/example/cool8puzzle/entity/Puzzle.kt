@@ -25,7 +25,7 @@ class Puzzle(private val tiles: Array<IntArray>) {
         }
     }
 
-    fun getTileList(): List<Int> {
+    fun tileList(): List<Int> {
         return tiles.flatMap { it.asList() }
     }
 
@@ -173,19 +173,19 @@ class Puzzle(private val tiles: Array<IntArray>) {
         return puzzles
     }
 
-    private fun randomBoard(size: Int?): Puzzle {
-        val n = size ?: 3
-        val array = Array(n) { IntArray(n) { 0 } }
-        val set = (0 until n * n).shuffled().toMutableSet()
-        for (i in 0 until n) {
-            for (j in 0 until n) {
-                array[i][j] = set.first().apply {
-                    set.remove(this)
-                }
-            }
-        }
-        return Puzzle(array)
-    }
+//    private fun randomBoard(size: Int?): Puzzle {
+//        val n = size ?: 3
+//        val array = Array(n) { IntArray(n) { 0 } }
+//        val set = (0 until n * n).shuffled().toMutableSet()
+//        for (i in 0 until n) {
+//            for (j in 0 until n) {
+//                array[i][j] = set.first().apply {
+//                    set.remove(this)
+//                }
+//            }
+//        }
+//        return Puzzle(array)
+//    }
 
     enum class DIRECTION(val direction: String) {
         DOWN("down"),

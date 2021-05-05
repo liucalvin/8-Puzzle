@@ -15,7 +15,7 @@ class PuzzleTest {
 
         assertEquals(
                 listOf(1, 2, 3, 4, 5, 6, 7, 8, 0),
-                puzzle.getTileList()
+                puzzle.tileList()
         )
     }
 
@@ -139,7 +139,7 @@ class PuzzleTest {
 
         val neighhours = mutableSetOf<List<Int>>().apply {
             puzzle.neighbors().forEach {
-                this.add(it.getTileList())
+                this.add(it.tileList())
             }
         }
 
@@ -162,5 +162,15 @@ class PuzzleTest {
         ))
     }
 
+    @Test
+    fun `verify string converted to puzzle correctly`() {
+        val puzzleData = "123456780"
+        val expectedPuzzle = Puzzle(arrayOf(
+            intArrayOf(1, 2, 3),
+            intArrayOf(4, 5, 6),
+            intArrayOf(7, 8, 0)
+        ))
+        assertEquals(expectedPuzzle.tileList(), puzzleData.toPuzzle().tileList())
+    }
 
 }

@@ -18,8 +18,14 @@ class SolverStepsViewModel(puzzleData: String, puzzleSolver: PuzzleSolver): View
         puzzleSolver.solve(puzzleData.toPuzzle())
         val stepsData = puzzleSolver.solution()
         when {
-            stepsData == null -> showMessage(R.string.puzzle_not_valid)
-            stepsData.count() == 0 -> showMessage(R.string.puzzle_already_solved)
+            stepsData == null -> {
+                showMessage(R.string.puzzle_not_valid)
+                emit(emptyList<Puzzle>())
+            }
+            stepsData.count() == 1 -> {
+                showMessage(R.string.puzzle_already_solved)
+                emit(emptyList<Puzzle>())
+            }
             else -> emit(stepsData)
         }
     }

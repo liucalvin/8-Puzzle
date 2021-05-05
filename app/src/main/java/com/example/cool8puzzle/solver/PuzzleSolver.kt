@@ -9,7 +9,7 @@ class PuzzleSolver constructor(initial: Puzzle? = null) {
 
     private var steps: MutableList<Puzzle>? = null
     private var solvedNode: Node? = null
-    private var isSolvable = false
+    private var isSolvable = initial?.isSolvable() ?: false
 
     init {
         initial?.let { solve(it) }
@@ -18,12 +18,14 @@ class PuzzleSolver constructor(initial: Puzzle? = null) {
     fun solve(puzzle: Puzzle) {
         val initialNode = Node(puzzle, 0, null)
 
-        // Java's PriorityQueue is a minimum one by default (ordered in ascending order)
-        val solver = PriorityQueue<Node>()
+        isSolvable = puzzle.isSolvable()
 
-        solver.add(initialNode)
-        if (puzzle.isSolvable()) {
-            solve(solver)
+        if (isSolvable) {
+            // Java's PriorityQueue is a minimum one by default (ordered in ascending order)
+            PriorityQueue<Node>().apply {
+                add(initialNode)
+                solve(this)
+            }
         }
     }
 
@@ -34,7 +36,6 @@ class PuzzleSolver constructor(initial: Puzzle? = null) {
             if (delMin != null) {
                 if (delMin.puzzle.isSolved()) {
                     solvedNode = delMin
-                    isSolvable = true
                     return
                 }
 
@@ -54,16 +55,10 @@ class PuzzleSolver constructor(initial: Puzzle? = null) {
         }
     }
 
-    fun moves(): Int {
-        if (steps == null) {
-            solution()
-        }
-
-        return if (isSolvable) {
-            steps!!.size - 1
-        } else {
-            -1
-        }
+    fun moves(): Int = if (isSolvable) {
+        steps!!.size - 1
+    } else {
+        -1
     }
 
     fun solution(): MutableList<Puzzle>? {

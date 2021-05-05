@@ -3,17 +3,9 @@ package com.example.cool8puzzle.ui.fragments
 import android.os.Build
 import androidx.fragment.app.testing.FragmentScenario
 import androidx.lifecycle.Lifecycle
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.testing.TestNavHostController
-import androidx.test.core.app.ApplicationProvider
-import androidx.test.core.app.launchActivity
-import com.example.cool8puzzle.R
-import com.example.cool8puzzle.ui.MainActivity
 import com.example.cool8puzzle.ui.viewmodels.SolverStepsViewModel
 import com.example.cool8puzzle.ui.viewmodels.mockSolverStepsViewModel
 import org.junit.After
-import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith

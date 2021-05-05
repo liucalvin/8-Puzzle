@@ -1,4 +1,4 @@
-package com.example.cool8puzzle.ui
+package com.example.cool8puzzle.ui.viewholders
 
 import android.os.Build
 import android.widget.FrameLayout
