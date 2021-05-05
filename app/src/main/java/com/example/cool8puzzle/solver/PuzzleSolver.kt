@@ -22,7 +22,9 @@ class PuzzleSolver constructor(initial: Puzzle? = null) {
         val solver = PriorityQueue<Node>()
 
         solver.add(initialNode)
-        solve(solver)
+        if (puzzle.isSolvable()) {
+            solve(solver)
+        }
     }
 
     private fun solve(solver: PriorityQueue<Node>) {

@@ -1,8 +1,7 @@
 package com.example.cool8puzzle.solver
 
 import com.example.cool8puzzle.entity.Puzzle
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNotNull
+import org.junit.Assert.*
 import org.junit.Test
 
 class PuzzleSolverTest {
@@ -43,6 +42,22 @@ class PuzzleSolverTest {
         solver = PuzzleSolver(puzzle3)
         assertNotNull(solver.solution())
         assertEquals(solver.moves(), 18)
+        assertNotNull(solver.solution())
+    }
+
+    @Test
+    fun `verify invalid board returns empty solution`() {
+        val puzzle = Puzzle(
+            arrayOf(
+                intArrayOf(1, 2, 3),
+                intArrayOf(4, 5, 6),
+                intArrayOf(8, 7, 0)
+            )
+        )
+        solver = PuzzleSolver(puzzle)
+        assertEquals(solver.moves(), -1)
+        assertEquals(solver.solution()!!.size, 0)
+        assertEquals(solver.moves(), -1)
     }
 
 }
