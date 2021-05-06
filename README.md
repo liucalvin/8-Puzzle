@@ -1,13 +1,10 @@
 # 8 Puzzle
 
-
 ![android ci](https://github.com/liucalvin/8-Puzzle/actions/workflows/android-ci.yml/badge.svg) [![coverage](https://codecov.io/gh/liucalvin/8-Puzzle/branch/main/graph/badge.svg?token=P07CKN957S)](https://codecov.io/gh/liucalvin/8-Puzzle)
 
-8 puzzle game on Android, written in Kotlin, with a solver capable of solving any random legal board. 
+8 puzzle game on Android, with a solver capable of solving any random board. 
 
-Try it out on your android device here by downloading the .apk file here: https://drive.google.com/file/d/19CmGJLkYqqdgmwejVBUt-HI9resNBcBF/view?usp=sharing
-
-You can try solving a random board: 
+You can try playing the puzzle yourself: 
 
 ![game play](Files/screenrecording1.gif)
 
